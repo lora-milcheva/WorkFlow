@@ -1,0 +1,63 @@
+.date-box {
+  display: inline-block;
+  width: 13.2%;
+  height: 100px;
+  background-color: #fafafa;
+  color: #9c9c9c;
+  padding: 10px;
+  margin: 5px 10px 5px 0;
+  font-size: larger;
+}
+
+.add-time-input {
+  margin-top: 1.7em;
+  max-width: 100%;
+  background-color: transparent;
+  border: 0px;
+  padding:  5px;
+  color: #ff6545;
+  font-size: .8em;
+}
+
+.weekday {
+  display: inline-block;
+  width: 13.2%;
+  height: 30px;
+  border-bottom: 2px solid #f2f2f2;
+  /*background-color: #fafafa;*/
+  color: #ff6545;
+  padding: 0 10px;
+  margin: 5px 10px -10px 0;
+  font-size: .8em;
+}
+
+input::placeholder {
+  color: #d0d0d0 !important;
+}
+
+.add-time-input:focus {
+  background-color: #fff;
+  border: 1px solid #ebebeb;
+  outline: none
+}
+
+.right {
+  float: right;
+}
+
+.buttons-section {
+  margin-top: 15px;
+  min-height: 60px;
+}
+
+.empty {
+  background-color: transparent;
+}
+
+.orange-text {
+  color: #ff6545;
+}
+
+.month-box {
+  padding: 0 10px;
+}

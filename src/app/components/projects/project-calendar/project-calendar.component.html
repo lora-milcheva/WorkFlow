@@ -1,0 +1,32 @@
+<p class="orange-text month-box"> {{ monthAsString }} {{ year }} </p>
+
+<form (ngSubmit)="save()" #calendarForm="ngForm">
+
+  <!--<div class="col-md-12"> {{ incomingFormData | json }}</div>-->
+  <div *ngFor="let day of weekdays" class="weekday">
+   {{ day }}
+  </div>
+
+  <div *ngFor="let day of emptyDays" class="date-box empty">
+  </div>
+
+  <div *ngFor="let day of daysTable" class="date-box">
+   {{ day }}
+    <input
+      disabled="{{status}}"
+      type="text"
+      id="{{day}}"
+      [(ngModel)]="incomingFormData[day - 1]"
+      name="{{day}}"
+      class="add-time-input"
+      placeholder="{{(monthSchedule[day - 1].workTimeInMinutes)}} min"
+    />
+  </div>
+
+  <div *ngIf="project.status === 'active' " class="buttons-section">
+    <input type="submit" class="btn btn-default right " value="Update Time">
+  </div>
+
+</form>
+
+

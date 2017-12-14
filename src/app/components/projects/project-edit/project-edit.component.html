@@ -1,0 +1,77 @@
+<div *ngIf="project">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h3>Edit project</h3>
+
+      <form (ngSubmit)="createProject()" #editProjectForm="ngForm">
+
+        <div class="form-group">
+          <label for="name">Project name</label>
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 required
+                 [(ngModel)]="project.name"
+                 name="name"
+                 #name="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+            Project name is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="client">Client</label>
+          <select class="form-control"
+                  id="client"
+                  required
+                  disabled
+                  [(ngModel)]="project.client"
+                  name="client"
+                  #client="ngModel">
+            <option *ngFor="let client of clients" [value]="client"> {{client}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Project rate</label>
+          <input type="number"
+                 class="form-control"
+                 id="rate"
+                 required
+                 [(ngModel)]="project.rate"
+                 name="rate"
+                 #rate="ngModel">
+          <div [hidden]="rate.valid || rate.pristine" class="alert alert-danger">
+            Project rate is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="budget">Project budget</label>
+          <input type="number"
+                 class="form-control"
+                 id="budget"
+                 [(ngModel)]="project.budget"
+                 name="budget"
+                 #budget="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="due-date">Due date</label>
+          <input type="date"
+                 class="form-control"
+                 id="due-date"
+                 [(ngModel)]="project.dueDate"
+                 name="due-date"
+                 #budget="ngModel">
+        </div>
+
+        <div class="right-container">
+          <input [disabled]="!editProjectForm.form.valid" type="submit" class="btn btn-default float-right" value="Edit"/>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>

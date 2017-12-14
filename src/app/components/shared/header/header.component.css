@@ -1,0 +1,40 @@
+nav {
+  background-color: #ff6545;
+  /*border-bottom: 1px solid #f2f2f2;*/
+  /*margin-bottom: 30px;*/
+  font-size: .9em;
+  height: 50px;
+  padding: 0 20px !important;
+}
+.navbar-nav {
+  padding: 0!important;
+}
+.nav-link {
+  color: #ffffff !important;
+  padding: 8px 15px !important;
+  height: 100%;
+}
+
+.nav-item {
+  height: 100% !important;
+}
+
+.nav-item:hover {
+  background-color: rgb(213, 213, 213);
+  color: #ffffff !important;
+  transition: ease-in-out .3s;
+}
+
+.nav-item.active {
+  background-color: #646464;
+  /*color: #646464 !important;*/
+  border-bottom: 0px solid #ffffff;
+}
+
+.logo {
+  width: auto;
+  max-height: 10px;
+  font-family: "Raleway SemiBold";
+  color: #ffffff;
+}
+

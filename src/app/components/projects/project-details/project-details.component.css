@@ -1,0 +1,54 @@
+.header {
+  min-height: 150px;
+}
+
+.summary {
+  background-color: #0db273;
+  padding: 1em;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.summary h5 {
+  font-weight: 300;
+}
+
+.orange-text {
+  color: #ff6545;
+}
+
+.btn-edit {
+  background-color: #ff6545;
+  color: #ffffff;
+  border-radius: 0;
+}
+
+.btn-edit:hover {
+  background-color: #ffa491;
+}
+
+.btn-close-delete {
+  background-color: #f2f2f2;
+  color: #b4b4b4;
+  border-radius: 0;
+}
+
+.btn-close-delete:hover {
+  background-color: #0db273;
+  color: #fff;
+}
+
+.buttons-section {
+  padding: .5em 0 0 0;
+}
+
+.buttons-section .btn {
+  font-size: .8em;
+}
+.due-date-badge {
+  font-size: .35em;
+  font-weight: 200;
+  background-color: #0db273;
+  padding: 5px 15px;
+  color: #fff;
+}

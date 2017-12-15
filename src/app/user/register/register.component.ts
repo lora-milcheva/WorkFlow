@@ -17,7 +17,7 @@ export class RegisterComponent {
     private authService: AuthenticationService,
     private router: Router
   ) {
-    this.model = new RegisterModel('', '', '', '');
+    this.model = new RegisterModel('', '', '', '', false);
   }
 
   register(): void {

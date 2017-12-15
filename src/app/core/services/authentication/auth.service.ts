@@ -5,12 +5,15 @@ import { of } from 'rxjs/observable/of';
 import { Subject } from 'rxjs/Subject';
 import { catchError, map, tap } from 'rxjs/operators';
 
+// Notifications
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
 // Models
 import { RegisterModel } from '../../models/register.model';
 import { LoginModel } from '../../models/login.model';
 
 const appKey = 'kid_ry_Tw0UZM';  // APP KEY HERE;
-const appSecret = '522e7cb94b524b619f246db9bafc5a8b';  // APP SECRET HERE;
+const appSecret = '522e7cb94b524b619f246db9bafc5a8b';// APP SECRET HERE;
 const registerUrl = `https://baas.kinvey.com/user/${appKey}`;
 const loginUrl = `https://baas.kinvey.com/user/${appKey}/login`;
 const logoutUrl = `https://baas.kinvey.com/user/${appKey}/_logout`;
@@ -20,7 +23,8 @@ export class AuthenticationService {
   private currentAuthtoken: string;
   private loggedIn: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private toastr: ToastsManager) {
   }
 
   login(data: LoginModel): Observable<Object> {
@@ -69,6 +73,17 @@ export class AuthenticationService {
     return authtoken === this.currentAuthtoken;
   }
 
+  getUser () {
+    return this.http
+      .get(
+        'https://baas.kinvey.com/user/' + appKey + `/?query={"username":"${localStorage.getItem('username')}"}`,
+        {headers: this.createAuthHeaders('Kinvey')}
+      )
+      .pipe(
+        catchError(err => this.handleError(err))
+      );
+  }
+
   get authtoken() {
     return this.currentAuthtoken;
   }
@@ -93,6 +108,7 @@ export class AuthenticationService {
 
   private handleError(err) {
     console.log(err);
+    this.toastr.error(err.error.description);
     return of(err);
     // return Observable.throw(new Error(err.message));
   }

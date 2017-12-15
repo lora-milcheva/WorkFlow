@@ -20,9 +20,7 @@ const appSecret = '522e7cb94b524b619f246db9bafc5a8b';  // APP SECRET HERE;
 const baseUrl = 'https://baas.kinvey.com';
 
 // URL-s
-const createProjectUrl = baseUrl + '/appdata/' + appKey + '/projects';
-const loadCurrentUserProjectsUrl = baseUrl + '/appdata/' + appKey + `/projects?query={"creator":"${localStorage.getItem('username')}"}`;
-const getProjectById = baseUrl + '/appdata/' + appKey + '/projects/';
+const projectsUrl = baseUrl + '/appdata/' + appKey + '/projects';
 const workTimeUrl = baseUrl + '/appdata/' + appKey + '/work-days';
 
 
@@ -36,7 +34,7 @@ export class ProjectService {
   createProject(data: ProjectModel): Observable<Object> {
     return this.http
       .post<ProjectModel>(
-        createProjectUrl,
+        projectsUrl,
         JSON.stringify(data),
         {headers: this.createAuthHeaders('Kinvey')}
       )
@@ -47,9 +45,23 @@ export class ProjectService {
   }
 
   loadCurrentUserProjects(): Observable<ProjectModel[]> {
+    let username = localStorage.getItem('username');
+    console.log(username);
     return this.http
       .get<ProjectModel[]>(
-        loadCurrentUserProjectsUrl,
+        projectsUrl + '/' + `?query={"creator":"${username}"}`,
+        {headers: this.createAuthHeaders('Kinvey')}
+      )
+      .pipe(
+        // tap(projects => this.toastr.success(`projects loaded`)),
+        catchError(err => this.handleError(err))
+      );
+  }
+
+  loadAllProjects(): Observable<ProjectModel[]> {
+    return this.http
+      .get<ProjectModel[]>(
+        projectsUrl,
         {headers: this.createAuthHeaders('Kinvey')}
       )
       .pipe(
@@ -61,7 +73,7 @@ export class ProjectService {
   getProjectById(projectId: string): Observable<ProjectModel> {
     return this.http
       .get<ProjectModel>(
-        getProjectById + projectId,
+        projectsUrl + '/' + projectId,
         {headers: this.createAuthHeaders('Kinvey')}
       )
       .pipe(
@@ -111,7 +123,7 @@ export class ProjectService {
   saveProject(projectId: string, data: ProjectModel): Observable<ProjectModel> {
     return this.http
       .put<ProjectModel>(
-        getProjectById + projectId,
+        projectsUrl + '/' + projectId,
         JSON.stringify(data),
         {headers: this.createAuthHeaders('Kinvey')}
       )
@@ -121,6 +133,31 @@ export class ProjectService {
       );
   }
 
+  deleteProject(projectId: string) {
+    console.log('from delete service');
+    return this.http
+      .delete(
+        projectsUrl + '/' + projectId,
+        {headers: this.createAuthHeaders('Kinvey')},
+      )
+      .pipe(
+        tap(projects => this.toastr.success(`project deleted`)),
+        catchError(err => this.handleError(err))
+      );
+  }
+
+  deleteProjectWorkDays(projectId: string) {
+    console.log('from delete time service');
+    return this.http
+      .delete(
+        workTimeUrl  + `?query={"projectId":"${projectId}"}`,
+        {headers: this.createAuthHeaders('Kinvey')},
+      )
+      .pipe(
+        tap(projects => this.toastr.success(`project time deleted`)),
+        catchError(err => this.handleError(err))
+      );
+  }
   // searchProjects(projectName: string)  {
   //   return ProjectModel[]
   //     .debounceTime(1000)
@@ -143,7 +180,7 @@ export class ProjectService {
       });
     } else {
       return new HttpHeaders({
-        'Authorization': `Kinvey ${localStorage.getItem('authtoken')}`,
+        'Authorization': `Kinvey ` + localStorage.getItem('authtoken'),
         'Content-Type': 'application/json'
       });
     }
@@ -152,10 +189,10 @@ export class ProjectService {
   private handleError(err) {
     console.log(err);
     if (err.status >= 200 && err.status < 300) {
-      this.toastr.success(err.statusText, err.status);
+      this.toastr.success(err.statusText, err.error.description);
     }
     if (err.status >= 400 && err.status < 500) {
-      this.toastr.error(err.statusText, err.status);
+      this.toastr.error(err.statusText, err.error.description);
     }
     return of(err);
     // return Observable.throw(new Error(err.message));

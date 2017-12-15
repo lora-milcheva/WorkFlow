@@ -12,6 +12,7 @@ import { WorkDayModel } from '../../../core/models/work-day.model';
 
 // Services
 import { ProjectService } from '../../../core/services/project/project.service';
+import { AuthenticationService } from '../../../core/services/authentication/auth.service';
 
 
 @Component({
@@ -29,7 +30,11 @@ export class ProjectDetailsComponent implements OnInit {
   public minutes: number;
   public balance: number;
 
+  private user: any;
+  private isAdmin: boolean;
+
   constructor(private projectService: ProjectService,
+              private authService: AuthenticationService,
               private route: ActivatedRoute,
               private router: Router) {
     this.projectId = this.route.snapshot.params['id'];
@@ -38,6 +43,19 @@ export class ProjectDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.loadProject();
+    this.checkUser();
+  }
+
+  checkUser() {
+    this.authService
+      .getUser()
+      .subscribe(data => {
+        this.user = data[0];
+
+        if (this.user._kmd.hasOwnProperty('roles')) {
+          this.isAdmin = true;
+        }
+      });
   }
 
   loadProject(): void {
@@ -68,6 +86,17 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   deleteProject() {
-    console.log('dalete');
+    this.projectService
+      .deleteProject(this.projectId)
+      .subscribe(data => {
+      });
+
+    this.projectService
+      .deleteProjectWorkDays(this.projectId)
+      .subscribe(data => {
+        console.log(data);
+      })
+
+    this.router.navigate(['/project/list']);
   }
 }

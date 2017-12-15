@@ -79,9 +79,7 @@ export class ProjectCalendarComponent implements OnInit {
   }
 
   save() {
-    console.log(this.monthSchedule);
     let day = 1;
-
     for (const time of this.incomingFormData) {
       if (time !== '' && time !== undefined) {
 
@@ -109,7 +107,6 @@ export class ProjectCalendarComponent implements OnInit {
       day++;
     }
     this.loadSchedule();
-    // window.location.reload();
   }
 
   loadSchedule() {
@@ -138,7 +135,6 @@ export class ProjectCalendarComponent implements OnInit {
           }
         }
         this.calculateTotalTime();
-
       });
   }
 

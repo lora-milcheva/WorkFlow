@@ -8,7 +8,6 @@ import { AppRoutesModule } from './routes.module';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 

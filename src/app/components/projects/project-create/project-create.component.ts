@@ -55,7 +55,6 @@ export class ProjectCreateComponent implements OnInit {
       .getAllClients()
       .subscribe(data => {
         this.clients = data;
-        console.log(data);
       });
   }
 

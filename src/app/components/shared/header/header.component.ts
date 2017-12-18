@@ -4,7 +4,7 @@ import { AuthenticationService } from '../../../core/services/authentication/aut
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
-  styleUrls: [ 'header.component.css' ]
+  styleUrls: [ 'test.scss' ]
 })
 export class HeaderComponent implements OnInit{
   public user: string;

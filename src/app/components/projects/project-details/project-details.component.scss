@@ -1,0 +1,51 @@
+.project-info {
+  width: 100%;
+  min-height: 150px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  margin-bottom: 30px;
+}
+
+.calendar-box {
+  margin: auto;
+  width: 70%;
+}
+
+.project-name {
+  width: 70%;
+  float: left;
+}
+
+.summary-box {
+  padding: 2em;
+  width: 30%;
+  float: left;
+}
+
+.summary {
+  width: 15%;
+  background-color: #0db273;
+  padding: 1em;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.summary h5 {
+  font-weight: 300;
+}
+
+.orange-text {
+  color: #ff6545;
+}
+
+.due-date-badge {
+  font-size: .4em;
+  font-weight: 200;
+  //background-color: #0db273;
+  padding: 5px 15px;
+  color: #fff;
+}
+
+.accent {
+  color: #00beff;
+  font-weight: 200;
+}

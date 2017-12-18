@@ -1,0 +1,81 @@
+$primary-color: #00beff;
+$secondary-color: #38c488;
+$third-color: rgb(255, 101, 69);
+$dark-grey-color: #646464;
+$light-grey-color: #b4b4b4;
+$active-color: #bee854;
+$white-color: #fff;
+
+.project-box {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);;
+  padding: 1em;
+  color: $light-grey-color;
+  margin: 0em 0;
+}
+
+.project-box:hover {
+  background-color: $dark-grey-color;
+  transition: ease-in-out .2s;
+}
+
+.project-box:hover h4 {
+  color: $active-color;
+  transition: ease-in-out .1s;
+}
+
+.buttons-section {
+  padding: 10px 0;
+}
+
+.details {
+  display: inline-block;
+  width: 20%;
+}
+
+.right {
+  text-align: right;
+  float: right;
+}
+
+.accent {
+  color: $primary-color;
+  font-weight: 200;
+}
+
+.currency {
+  font-size: .7em;
+  color: $light-grey-color;
+}
+
+.status {
+  //position: relative;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  border-radius: 100%;
+  float: right;
+  //margin-top: -28px;
+  color: #fff;
+  text-align: center;
+}
+
+.active {
+  background-color: $secondary-color;
+  color: $dark-grey-color;
+}
+
+.closed {
+  background-color: #bee854;
+}
+
+.section {
+  /*background-color: #f2f2f2;*/
+  margin: 2em 0;
+  padding: 0 0 3em 0;
+}
+
+.section-name-label {
+  /*margin-left: -60px;*/
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+}

@@ -14,7 +14,7 @@ import { ProjectService } from '../../../core/services/project/project.service';
 @Component({
   selector: 'app-calendar',
   templateUrl: './project-calendar.component.html',
-  styleUrls: ['./project-calendar.component.css'],
+  styleUrls: ['./project-calendar.component.scss'],
 })
 export class ProjectCalendarComponent implements OnInit {
   @Input() project: ProjectModel;
@@ -22,8 +22,8 @@ export class ProjectCalendarComponent implements OnInit {
   public projectId: string;
   public status = false;
 
-  public currentDate: Date = new Date();
-  public weekday: number;
+  public currentDate: Date;
+  public weekday: any;
   public today: number;
   public month: number;
   public monthAsString: string;
@@ -40,10 +40,13 @@ export class ProjectCalendarComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private projectService: ProjectService,
               private router: Router) {
+    this.currentDate = new Date();
     this.today = this.currentDate.getDate();
     this.month = this.currentDate.getMonth();
     this.year = this.currentDate.getFullYear();
-    this.weekday = this.currentDate.getDay();
+    this.weekday = new Date(this.year, this.month, 1).getDay();
+
+    console.log(this.weekday);
 
     this.daysTable = [];
     this.monthAsString = this.monthToString(this.month);
@@ -54,7 +57,7 @@ export class ProjectCalendarComponent implements OnInit {
 
     this.projectId = this.route.snapshot.params['id'];
 
-    for (let i = 0; i < this.weekday; i++) {
+    for (let i = 1; i < this.weekday; i++) {
       this.emptyDays.push(i);
     }
   }
@@ -156,4 +159,6 @@ export class ProjectCalendarComponent implements OnInit {
     this.project.totalTime = time;
     this.updateProject();
   }
+
+
 }

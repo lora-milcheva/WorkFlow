@@ -12,7 +12,7 @@ import { logWarnings } from "protractor/built/driverProviders";
 @Component({
   selector: 'app-projects-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.css'],
+  styleUrls: ['./project-list.component.scss'],
   providers: []
 })
 export class ProjectListComponent implements OnInit {

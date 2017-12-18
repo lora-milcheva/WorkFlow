@@ -1,43 +1,317 @@
-.btn {
-  margin: 3px;
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+/*ClearFix*/
+.group:before,
+.group:after {
+  content: "";
+  display: table;
 }
 
+.group:after {
+  clear: both;
+}
+
+.group {
+  zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.container {
+  /*background-color: #fff;*/
+  padding: 3em 3em 1em 3em;
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url('https://fonts.googleapis.com/css?family=Titillium+Web');
+}
+
+/*@import url('https://fonts.googleapis.com/css?family=Titillium+Web');*/
+body {
+  font-family: 'Titillium Web', sans-serif;
+  color: #9c9c9c;
+  background-color: #575757;
+  transition: .3s;
+}
+
+a {
+  color: #9c9c9c;
+}
+a, a:hover, a:visited, a:focus {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: .5em;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: .5em;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: .5em;
+}
+
+h4 {
+  font-size: 16px;
+  margin-bottom: .5em;
+}
+
+h5 {
+  font-size: 14px;
+  margin-bottom: .5em;
+}
+
+p {
+  font-size: 12px;
+  margin-bottom: .5em;
+}
+
+/*Common*/
+hr {
+  background-color: rgba(255, 255, 255, 0.35);
+  height: 1px;
+  border: 0;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+
+/*Buttons*/
+button {
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.button {
+  position: relative;
+  background-color: #4CAF50;
+  border: none;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+
+}
+
+.button:after {
+  content: "";
+  background: #90EE90;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -200px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.btn {
+  margin: 3px;
+  padding: 5px 30px;
+  cursor: pointer !important;
+  transition: ease-in-out .3s;
+
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+
+
 .btn-default {
-  background-color: #ff6545;
-  color: #ffffff !important;
-  border-radius: 0;
-  padding: 17px 30px;
+  background-color: #38c488;
+  color: #575757 !important;
   box-shadow: none;
 }
 
 .btn-default:hover {
-  background-color: #ffa491;
+  color: #ffffff !important;
+  background-color: rgba(56, 196, 136, 0.7);
+
+  animation-name: bounce !important;
+  -moz-animation-name: bounce !important;
 }
 
 .btn-primary {
-  background-color: #ebebeb !important;
-  color: #9c9c9c !important;
-  border: 1px solid #ebebeb;
-  border-radius: 0;
-  padding: 17px 30px;
-  outline: none !important;
+  background-color: #606060;
+  color: #9c9c9c;
 }
 
 .btn-primary:hover {
-  background-color: #0db273 !important;
-  border: 1px solid #0db273;
-  color: #fff !important;
+  /*background-color: #0db273;*/
+  background-color: #6e6e6e;
+  color: #fff;
+
+  animation-name: bounce !important;
+  -moz-animation-name: bounce !important;
 }
 
-.btn.active.focus,
-.btn.active:focus,
-.btn.focus,
-.btn.focus:active,
-.btn:active:focus,
-.btn:focus {
-  outline: 0 !important;
-  outline-offset: 0  !important;
-  background-image: none  !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none  !important;
+.btn-danger {
+  background-color: transparent;
+  color: #6e6e6e;
+  width: 20%;
+  text-align: left;
+  padding-left: 0;
 }
+.btn-danger .glyphicon {
+  color: #bee854;
+}
+.btn-danger:hover {
+  background-color: #bee854;
+  color: #4c4c4c;
+  padding-left: 25px;
+}
+.btn-danger:hover .glyphicon {
+  color: #84ac4a;
+  padding-right: 10px;
+}
+
+
+.btn-default-simple {
+  width: 20%;
+  text-align: left;
+  padding-left: 0;
+  background-color: transparent;
+  color: #6e6e6e;
+}
+.btn-default-simple .glyphicon {
+  color: #0db273;
+}
+.btn-default-simple:hover {
+  background-color: #0db273;
+  color: #fff;
+  padding-left: 25px;
+}
+.btn-default-simple:hover .glyphicon {
+  color: #0d9158;
+  padding-right: 10px;
+}
+
+.glyphicon {
+  margin-right: 5px;
+  transition: ease-in-out .3s;
+}
+
+
+/*Forms*/
+.form-container {
+  width: 35%;
+  margin: auto !important;
+  margin: 0;
+}
+
+.form-container .form-header {
+  height: 50px;
+  color: rgba(56, 196, 136, 0.79);
+  margin-bottom: 20px;
+}
+
+.form-group {
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.form-group .form-control {
+  width: 100%;
+  margin-top: 10px;
+  /*color: #ffffff;*/
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background-color: transparent;
+  border: none;
+  height: 40px;
+  color: #b4b4b4;
+  padding: 5px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  transition: ease-in-out .2s;
+}
+
+input:focus {
+  background-color: rgba(180, 180, 180, 0.2);
+  color: #3fe6a3;
+  border-bottom: 1px solid #3fe6a3;
+}
+
+textarea:focus, input:focus, select:focus, option:focus {
+  outline: none;
+}
+
+option {
+  background-color: #575757;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=date]::-webkit-inner-spin-button,
+select::-webkit-inner-spin-button {
+  /*-webkit-appearance: none;*/
+  cursor:pointer;
+  text-align:center;
+  position:relative;
+  width: 8px;
+  height: 14px;
+  padding: 5px;
+  transition: ease-in-out .7s;
+}
+
+input[type=button],
+input[type=submit] {
+  outline: none;
+  padding: 10px 30px;
+  border: none;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/*Animations*/
+
+@keyframes bounce {
+  0%, 100%, 20%, 50%, 80% {
+    -webkit-transform: translateY(0);
+    -ms-transform:     translateY(0);
+    transform:         translateY(0)
+  }
+  40% {
+    -webkit-transform: translateY(-7px);
+    -ms-transform:     translateY(-7px);
+    transform:         translateY(-7px)
+  }
+  60% {
+    -webkit-transform: translateY(0px);
+    -ms-transform:     translateY(0px);
+    transform:         translateY(0px)
+  }
+}
+

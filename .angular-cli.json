@@ -21,7 +21,7 @@
       "styles": [
         "styles.css",
         "../node_modules/ng2-toastr/ng2-toastr.css",
-        "assets/css/bootstrap.css",
+        "assets/css/reset.css",
         "assets/css/custom.css",
         "assets/glyphicons/glyphicons.css"
       ],
@@ -58,7 +58,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }

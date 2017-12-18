@@ -1,0 +1,80 @@
+$primary-color: #00beff;
+$secondary-color: #38c488;
+$third-color: rgb(255, 101, 69);
+$dark-grey-color: #646464;
+$light-grey-color: #b4b4b4;
+$active-color: #bee854;
+$white-color: #fff;
+
+
+
+.date-box {
+  display: inline-block;
+  width: 13.25%;
+  height: 80px;
+  background-color: $dark-grey-color;
+  color: $secondary-color;
+  padding: 10px;
+  margin: .5%;
+  font-size: larger;
+  float: left;
+}
+
+.add-time-input {
+  margin-top: .7em;
+  max-width: 100%;
+  background-color: transparent;
+  padding:  5px;
+  border: none;
+  color: $third-color;
+  font-size: .8em;
+  font-family: 'Titillium Web', sans-serif;
+  transition: ease-in-out .3s;
+}
+
+.weekday {
+  display: inline-block;
+  width: 13.25%;;
+  height: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  /*background-color: #fafafa;*/
+  color: $secondary-color;
+  padding: 0 10px 0 10px;
+  margin: .5%;
+  font-size: .8em;
+}
+
+input::placeholder {
+  color: #d0d0d0;
+}
+
+.add-time-input:focus {
+  background-color: #5d5d5d;
+  border: 1px solid #6e6e6e;
+  outline: none
+}
+
+.buttons-section {
+  margin-top: 15px;
+  min-height: 60px;
+}
+
+.empty {
+  background-color: transparent;
+}
+
+.has-value {
+  color: #ff6545;
+}
+
+.has-value::placeholder {
+  color: #bee854;
+}
+
+.month-box {
+  width: 100%;
+  padding: 10px 10px;
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+

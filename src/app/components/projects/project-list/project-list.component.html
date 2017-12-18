@@ -1,64 +1,76 @@
-<div class="col-sm-12">
-  <div class="">
-    <h1>My dashboard</h1>
-  </div>
+<div class="group">
 
-  <div class="buttons-section">
+  <h1>My dashboard</h1>
+
+
+  <div class="buttons-section ">
     <a routerLink="/project/create" class="btn btn-default">New Project</a>
     <a routerLink="/client/create" class="btn btn-default">New Client</a>
     <div class="col-sm-8 right">
-      <input class=""><button>Search</button>
+      <input class="">
+      <button>Search</button>
     </div>
   </div>
 </div>
 
-<div class="row section">
+<div class="section">
 
-  <div class="col-sm-12">
-    <hr>
-    <h3 class="section-name-label">Active projects</h3>
-  </div>
+  <h3 class="">Active projects</h3>
+  <hr>
 
-  <div *ngFor="let project of activeProjects" class="col-sm-4">
+  <div *ngFor="let project of activeProjects" class="">
     <a routerLink="/project/details/{{project._id}}">
       <div class="project-box">
+
         <span class="status active">A</span>
-        <h4>{{project.name}}</h4>
-        <h5>{{project.client}}</h5>
-        <p>
-          <span class="details">Budget:</span>
-          <span class="right"> {{project.budget}} BGN</span>
-        </p>
-        <p>
-          <span class="details">Cost:</span>
-          <span class="right"> {{ project.totalTime * project.rate / 60 | number }} BGN</span>
-        </p>
-        <p>
-          <span class="details">Balance:</span>
-          <span class="right accent"> {{project.budget - ( project.totalTime * project.rate / 60 ) | number }} BGN</span>
-        </p>
+        <div class="details">
+          <h4>{{project.name}}</h4>
+          <h5>{{project.client}}</h5>
+        </div>
+
+        <div class="details">
+          Budget:
+          <span>
+            {{project.budget}}
+            <span class="currency">BGN</span>
+          </span>
+        </div>
+
+        <div class="details">
+          Cost:
+          <span class="">
+            {{ project.totalTime * project.rate / 60 | number }}
+            <span class="currency">BGN</span>
+          </span>
+        </div>
+
+        <div class="details">
+          Balance:
+          <span class="accent">
+            {{project.budget - ( project.totalTime * project.rate / 60 ) | number }}
+            <span class="currency">BGN</span>
+          </span>
+        </div>
+
       </div>
     </a>
   </div>
 </div>
 
 
-<div class="row section">
+<div class="">
+  <h3 class="">Closed projects</h3>
 
-  <div class="col-sm-12">
-    <h3 class=" section-name-label">Closed projects</h3>
-  </div>
-
-  <div *ngFor="let project of closedProjects" class="col-sm-4">
+  <div *ngFor="let project of closedProjects">
     <a href="project/details/{{project._id}}">
       <div class="project-box">
         <span class="status closed">C</span>
         <h4>{{project.name}}</h4>
         <h5>{{project.client}}</h5>
-        <p>
-          <span class="details">Budget:</span>
-          <span class="right"> {{project.budget}} BGN</span>
-        </p>
+
+        <span class="details">Budget:<span class="right"> {{project.budget}} BGN</span></span>
+
+
         <p>
           <span class="details">Cost:</span>
           <span class="right"> {{ project.totalTime * project.rate / 60 | number }} BGN</span>

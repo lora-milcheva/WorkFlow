@@ -14,11 +14,12 @@ import { WorkDayModel } from '../../../core/models/work-day.model';
 import { ProjectService } from '../../../core/services/project/project.service';
 import { AuthenticationService } from '../../../core/services/authentication/auth.service';
 
+import { PipesModule } from '../../../core/pipes/pipes.module';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project-details.component.html',
-  styleUrls: ['./project-details.component.css'],
+  styleUrls: ['./project-details.component.scss'],
   providers: [ConfirmOptions,
     // this is required so you can use the bundled position service rather than rely on the `@ng-bootstrap/ng-bootstrap` module
     {provide: Position, useClass: Positioning}]

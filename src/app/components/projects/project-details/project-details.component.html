@@ -1,38 +1,51 @@
-<div *ngIf="project" class="row">
+<div *ngIf="project" class="group">
 
+  <div class="project-info">
+    <div class="project-name">
+      <h1>{{ project.name }} <span class="due-date-badge ">Due date: {{ project.dueDate }}</span></h1>
+      <h5>{{ project.client }}</h5>
 
-  <div class="col-md-12 header">
-    <div class="row">
-      <div class="col-md-9 float-left">
-        <h1>{{ project.name }} <span class="badge due-date-badge float-right">Due date: {{ project.dueDate }}</span></h1>
-        <h5>{{ project.client }}</h5>
-
-
-        <div *ngIf="project.status === 'active'" class="buttons-section">
-          <button class="btn btn-edit" (click)="editProject()">Edit Project</button>
-          <button class="btn btn-close-delete" (click)="closeProject()">Close Project</button>
-          <button *ngIf="isAdmin" class="btn btn-close-delete" (click)="deleteProject()">Delete Project</button>
-        </div>
-
-        <div *ngIf="project.status === 'closed'" class="buttons-section">
-          <p>Project closed</p>
-        </div>
+      <div *ngIf="project.status === 'active'" class="buttons-section ">
+        <button class="btn btn-default-simple" (click)="editProject()">
+          <span class="glyphicon glyphicon-pencil"></span>
+          Edit Project
+        </button>
+        <button class="btn btn-default-simple" (click)="closeProject()">
+          <span class="glyphicon glyphicon-remove"></span>
+          Close Project
+        </button>
+        <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteProject()">
+          <span class="glyphicon glyphicon-trash"></span>
+          Delete Project
+        </button>
       </div>
 
-      <div class="col-md-3 float-lg-right">
-        <div class="summary">
-          <h5>Budget: <span class="float-right">{{ project.budget }} $</span></h5>
-          <h5>Total time: <span class="float-right">{{ hours }}h {{ minutes }}min</span></h5>
-          <h5>Balance: <span class="float-right">{{ balance | number }} $</span></h5>
-        </div>
+      <div *ngIf="project.status === 'closed'" class="buttons-section">
+        <p>Project closed</p>
       </div>
     </div>
+
+    <div class="summary-box">
+      <div class="">
+        <h5>Budget: <span class="right">{{ project.budget }} $</span></h5>
+        <h5>Total time: <span class="right">{{ hours }}h {{ minutes }}min</span></h5>
+        <h5>Balance: <span class="right accent">{{ balance | number }} $</span></h5>
+      </div>
+    </div>
+
   </div>
 
+  <!--<div class="summary right">-->
+    <!--<h5>Budget: <span class="right">{{ project.budget }} $</span></h5>-->
+    <!--<h5>Total time: <span class="right">{{ hours }}h {{ minutes }}min</span></h5>-->
+    <!--<h5>Balance: <span class="right">{{ balance | number }} $</span></h5>-->
+  <!--</div>-->
 
-  <div class="col-md-12">
-    <hr>
+
+  <div class="calendar-box">
+
     <app-calendar [project]="project"></app-calendar>
   </div>
+
 
 </div>

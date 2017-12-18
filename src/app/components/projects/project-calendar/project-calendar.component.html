@@ -11,8 +11,8 @@
     <form (ngSubmit)="save()" #calendarForm="ngForm" class="">
 
       <div class="group">
-        <div *ngFor="let day of emptyDays" class="date-box empty">
-        </div>
+
+        <div *ngFor="let day of emptyDays" class="date-box empty"></div>
 
         <div *ngFor="let day of daysTable" class="date-box">
           {{ day }}

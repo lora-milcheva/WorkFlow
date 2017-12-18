@@ -46,8 +46,6 @@ export class ProjectCalendarComponent implements OnInit {
     this.year = this.currentDate.getFullYear();
     this.weekday = new Date(this.year, this.month, 1).getDay();
 
-    console.log(this.weekday);
-
     this.daysTable = [];
     this.monthAsString = this.monthToString(this.month);
     this.monthSchedule = [];
@@ -83,23 +81,36 @@ export class ProjectCalendarComponent implements OnInit {
 
   save() {
     let day = 1;
+
+    // iterate all incoming data
     for (const time of this.incomingFormData) {
       if (time !== '' && time !== undefined) {
 
-        // check if value exists
+        // go through all days in current month
         for (const currentDay of this.monthSchedule) {
           const dayFromSchedule = currentDay.date.split('/')[1];
           const date = new Date(this.year, this.month, day).toLocaleString();
           const workDay = new WorkDayModel(this.projectId, date, time);
 
+          // check if current day has existing value from previous project update
+          // if so - update time, if not - create new time
           if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes !== 0) {
-            console.log(currentDay);
-            console.log(currentDay._id);
-            this.projectService
-              .updateWorkTime(currentDay._id, workDay)
-              .subscribe(data => {
-              });
-          } else if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes === 0) {
+
+            // check if new value is zero (in case we want to correct time - say added minutes to the wrong day)
+            // if so - delete time, if not - update time
+            if (Number(time) === 0) {
+              this.projectService
+                .deleteWorkTime(currentDay._id)
+                .subscribe(data => {
+                  console.log('time deleted');
+                });
+            } else {
+              this.projectService
+                .updateWorkTime(currentDay._id, workDay)
+                .subscribe(data => {
+                });
+            }
+          } else if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes === 0 && Number(time) !== 0) {
             this.projectService
               .saveWorkTime(workDay)
               .subscribe(data => {
@@ -159,6 +170,4 @@ export class ProjectCalendarComponent implements OnInit {
     this.project.totalTime = time;
     this.updateProject();
   }
-
-
 }

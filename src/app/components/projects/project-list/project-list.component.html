@@ -23,6 +23,7 @@
       <div class="project-box">
 
         <span class="status active">A</span>
+
         <div class="details">
           <h4>{{project.name}}</h4>
           <h5>{{project.client}}</h5>
@@ -30,7 +31,7 @@
 
         <div class="details">
           Budget:
-          <span>
+          <span class="money">
             {{project.budget}}
             <span class="currency">BGN</span>
           </span>
@@ -38,7 +39,7 @@
 
         <div class="details">
           Cost:
-          <span class="">
+          <span class="money">
             {{ project.totalTime * project.rate / 60 | number }}
             <span class="currency">BGN</span>
           </span>
@@ -46,7 +47,9 @@
 
         <div class="details">
           Balance:
-          <span class="accent">
+          <span
+            class="money plus"
+            [ngClass]="{'minus': project.budget - ( project.totalTime * project.rate / 60 ) <= 0}">
             {{project.budget - ( project.totalTime * project.rate / 60 ) | number }}
             <span class="currency">BGN</span>
           </span>

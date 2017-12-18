@@ -46,7 +46,6 @@ export class ProjectService {
 
   loadCurrentUserProjects(): Observable<ProjectModel[]> {
     let username = localStorage.getItem('username');
-    console.log(username);
     return this.http
       .get<ProjectModel[]>(
         projectsUrl + '/' + `?query={"creator":"${username}"}`,
@@ -108,6 +107,17 @@ export class ProjectService {
       );
   }
 
+  deleteWorkTime(workTimeId: string): Observable<WorkDayModel> {
+    return this.http
+      .delete<WorkDayModel>(
+        workTimeUrl  + '/' + workTimeId,
+        {headers: this.createAuthHeaders('Kinvey')}
+      )
+      .pipe(
+        tap(projects => this.toastr.success(`Time removed.`)),
+        catchError(err => this.handleError(err))
+      );
+  }
   getProjectTime(projectId: string): Observable<DbWorkDayModel[]> {
     return this.http
       .get<DbWorkDayModel[]>(

@@ -37,9 +37,21 @@ $white-color: #fff;
   float: right;
 }
 
-.accent {
+.plus {
   color: $primary-color;
   font-weight: 200;
+}
+
+.minus {
+  color: $active-color;
+  font-weight: 200;
+}
+
+.money {
+  display: inline-block;
+  //background-color: #00beff;
+  width: 100px;
+  text-align: right;
 }
 
 .currency {

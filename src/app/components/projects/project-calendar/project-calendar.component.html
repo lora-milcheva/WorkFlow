@@ -8,13 +8,13 @@
   </div>
 
   <div class="group">
-    <form (ngSubmit)="save()" #calendarForm="ngForm" class="">
+    <form (ngSubmit)="saveAddedTime()" #calendarForm="ngForm" class="">
 
       <div class="group">
 
         <div *ngFor="let day of emptyDays" class="date-box empty"></div>
 
-        <div *ngFor="let day of daysTable" class="date-box">
+        <div *ngFor="let day of daysInMonth" class="date-box">
           {{ day }}
           <input
             disabled="{{status}}"

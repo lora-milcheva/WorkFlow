@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -39,8 +39,14 @@ export class ProjectDetailsComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) {
     this.projectId = this.route.snapshot.params['id'];
-  }
 
+    this.projectService.projectReceived$.subscribe(data => {
+      this.project = data;
+      this.hours = Math.floor(this.project.totalTime / 60);
+      this.minutes = (this.project.totalTime % 60);
+      this.balance = this.project.budget - ( this.project.totalTime * this.project.rate / 60 );
+    });
+  }
 
   ngOnInit() {
     this.loadProject();
@@ -96,7 +102,7 @@ export class ProjectDetailsComponent implements OnInit {
       .deleteProjectWorkDays(this.projectId)
       .subscribe(data => {
         console.log(data);
-      })
+      });
 
     this.router.navigate(['/project/list']);
   }

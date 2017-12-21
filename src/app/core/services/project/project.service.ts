@@ -26,9 +26,15 @@ const workTimeUrl = baseUrl + '/appdata/' + appKey + '/work-days';
 
 @Injectable()
 export class ProjectService {
+  private projectSource = new Subject<any>();
+  projectReceived$ = this.projectSource.asObservable();
 
   constructor(private http: HttpClient,
               private toastr: ToastsManager) {
+  }
+
+  updateProjectData(data) {
+    this.projectSource.next(data);
   }
 
   createProject(data: ProjectModel): Observable<Object> {
@@ -168,6 +174,8 @@ export class ProjectService {
         catchError(err => this.handleError(err))
       );
   }
+
+
   // searchProjects(projectName: string)  {
   //   return ProjectModel[]
   //     .debounceTime(1000)

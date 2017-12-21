@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, OnDestroy, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 // import { FloorPipe } from '../../../core/pipes/floor-number.pipe';
 import { Router } from '@angular/router';
@@ -16,8 +16,9 @@ import { ProjectService } from '../../../core/services/project/project.service';
   templateUrl: './project-calendar.component.html',
   styleUrls: ['./project-calendar.component.scss'],
 })
-export class ProjectCalendarComponent implements OnInit {
+export class ProjectCalendarComponent implements OnInit, OnDestroy {
   @Input() project: ProjectModel;
+  @Output() notify: EventEmitter<ProjectModel> = new EventEmitter<ProjectModel>();
 
   public projectId: string;
   public status = false;
@@ -29,7 +30,7 @@ export class ProjectCalendarComponent implements OnInit {
   public monthAsString: string;
   public year: number;
 
-  public daysTable: number[];
+  public daysInMonth: number[];
   public monthSchedule: any[];
   private dbSchedule: WorkDayModel[];
   private emptyDays: number[];
@@ -46,7 +47,7 @@ export class ProjectCalendarComponent implements OnInit {
     this.year = this.currentDate.getFullYear();
     this.weekday = new Date(this.year, this.month, 1).getDay();
 
-    this.daysTable = [];
+    this.daysInMonth = [];
     this.monthAsString = this.monthToString(this.month);
     this.monthSchedule = [];
     this.emptyDays = [];
@@ -67,6 +68,10 @@ export class ProjectCalendarComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this.updateProject();
+  }
+
   getDaysInMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
   }
@@ -79,7 +84,7 @@ export class ProjectCalendarComponent implements OnInit {
     return monthNames[m];
   }
 
-  save() {
+  saveAddedTime() {
     let day = 1;
 
     // iterate all incoming data
@@ -87,7 +92,10 @@ export class ProjectCalendarComponent implements OnInit {
       if (time !== '' && time !== undefined) {
 
         // go through all days in current month
-        for (const currentDay of this.monthSchedule) {
+        for (let currentDay of this.monthSchedule) {
+
+          const index = (this.monthSchedule.indexOf(currentDay));
+
           const dayFromSchedule = currentDay.date.split('/')[1];
           const date = new Date(this.year, this.month, day).toLocaleString();
           const workDay = new WorkDayModel(this.projectId, date, time);
@@ -102,30 +110,40 @@ export class ProjectCalendarComponent implements OnInit {
               this.projectService
                 .deleteWorkTime(currentDay._id)
                 .subscribe(data => {
-                  console.log('time deleted');
+                  // this.project.totalTime -= currentDay.workTimeInMinutes;
+                  // this.projectService.updateProjectData(this.project);
+                  // this.monthSchedule[index].workTimeInMinutes = data.workTimeInMinutes;
                 });
             } else {
               this.projectService
                 .updateWorkTime(currentDay._id, workDay)
                 .subscribe(data => {
+                  // this.project.totalTime -= currentDay.workTimeInMinutes;
+                  // this.project.totalTime += Number(data.workTimeInMinutes);
+                  // this.projectService.updateProjectData(this.project);
+                  // this.monthSchedule[index].workTimeInMinutes = data.workTimeInMinutes;
                 });
             }
           } else if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes === 0 && Number(time) !== 0) {
             this.projectService
               .saveWorkTime(workDay)
               .subscribe(data => {
+                // this.project.totalTime += Number(data.workTimeInMinutes);
+                // this.projectService.updateProjectData(this.project);
+                // this.monthSchedule[index].workTimeInMinutes = data.workTimeInMinutes;
               });
           }
         }
       }
       day++;
     }
+    this.incomingFormData = [];
     this.loadSchedule();
   }
 
   loadSchedule() {
     this.monthSchedule = [];
-    this.daysTable = [];
+    this.daysInMonth = [];
 
     this.projectService
       .getProjectTime(this.projectId)
@@ -135,7 +153,7 @@ export class ProjectCalendarComponent implements OnInit {
         const daysInMonth = this.getDaysInMonth(this.year, this.month);
 
         for (let i = 1; i <= daysInMonth; i++) {
-          this.daysTable.push(i);
+          this.daysInMonth.push(i);
           const date = new Date(this.year, this.month, i).toLocaleString();
           this.monthSchedule.push(new WorkDayModel(this.projectId, date, 0));
         }
@@ -152,14 +170,6 @@ export class ProjectCalendarComponent implements OnInit {
       });
   }
 
-  updateProject() {
-    this.projectService
-      .saveProject(this.projectId, this.project)
-      .subscribe(data => {
-        this.project = data;
-      });
-  }
-
   calculateTotalTime() {
     let time = 0;
 
@@ -168,6 +178,16 @@ export class ProjectCalendarComponent implements OnInit {
     }
 
     this.project.totalTime = time;
-    this.updateProject();
+    this.projectService.updateProjectData(this.project);
+
+  }
+
+  updateProject() {
+    this.projectService
+      .saveProject(this.projectId, this.project)
+      .subscribe(data => {
+        this.project = data;
+        this.projectService.updateProjectData(this.project);
+      });
   }
 }

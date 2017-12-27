@@ -13,7 +13,7 @@ import { RegisterModel } from '../../models/register.model';
 import { LoginModel } from '../../models/login.model';
 
 const appKey = 'kid_ry_Tw0UZM';  // APP KEY HERE;
-const appSecret = '522e7cb94b524b619f246db9bafc5a8b';// APP SECRET HERE;
+const appSecret = '522e7cb94b524b619f246db9bafc5a8b'; // APP SECRET HERE;
 const registerUrl = `https://baas.kinvey.com/user/${appKey}`;
 const loginUrl = `https://baas.kinvey.com/user/${appKey}/login`;
 const logoutUrl = `https://baas.kinvey.com/user/${appKey}/_logout`;
@@ -22,9 +22,15 @@ const logoutUrl = `https://baas.kinvey.com/user/${appKey}/_logout`;
 export class AuthenticationService {
   private currentAuthtoken: string;
   private loggedIn: Subject<boolean> = new Subject<boolean>();
+  private username = new Subject<any>();
+  userReceived$ = this.username.asObservable();
 
   constructor(private http: HttpClient,
               private toastr: ToastsManager) {
+  }
+
+  updateUsername(data) {
+    this.username.next(data);
   }
 
   login(data: LoginModel): Observable<Object> {

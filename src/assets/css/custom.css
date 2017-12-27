@@ -92,42 +92,6 @@ button {
   font-family: 'Titillium Web', sans-serif;
 }
 
-.button {
-  position: relative;
-  background-color: #4CAF50;
-  border: none;
-  font-size: 28px;
-  color: #FFFFFF;
-  padding: 20px;
-  width: 200px;
-  text-align: center;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  text-decoration: none;
-  overflow: hidden;
-
-}
-
-.button:after {
-  content: "";
-  background: #90EE90;
-  display: block;
-  position: absolute;
-  padding-top: 300%;
-  padding-left: 350%;
-  margin-left: -200px !important;
-  margin-top: -120%;
-  opacity: 0;
-  transition: all 0.8s
-}
-
-.button:active:after {
-  padding: 0;
-  margin: 0;
-  opacity: 1;
-  transition: 0s
-}
-
 .btn {
   margin: 3px;
   padding: 5px 30px;
@@ -154,9 +118,8 @@ button {
 .btn-default:hover {
   color: #ffffff !important;
   background-color: rgba(56, 196, 136, 0.7);
-
-  animation-name: bounce !important;
-  -moz-animation-name: bounce !important;
+  /*animation-name: bounce !important;*/
+  /*-moz-animation-name: bounce !important;*/
 }
 
 .btn-primary {
@@ -168,9 +131,8 @@ button {
   /*background-color: #0db273;*/
   background-color: #6e6e6e;
   color: #fff;
-
-  animation-name: bounce !important;
-  -moz-animation-name: bounce !important;
+  /*animation-name: bounce !important;*/
+  /*-moz-animation-name: bounce !important;*/
 }
 
 .btn-danger {
@@ -192,7 +154,6 @@ button {
   color: #84ac4a;
   padding-right: 10px;
 }
-
 
 .btn-default-simple {
   width: 20%;
@@ -271,18 +232,18 @@ option {
   background-color: #575757;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=date]::-webkit-inner-spin-button,
-select::-webkit-inner-spin-button {
-  /*-webkit-appearance: none;*/
-  cursor:pointer;
-  text-align:center;
-  position:relative;
-  width: 8px;
-  height: 14px;
-  padding: 5px;
-  transition: ease-in-out .7s;
-}
+/*input[type=number]::-webkit-inner-spin-button,*/
+/*input[type=date]::-webkit-inner-spin-button,*/
+/*select::-webkit-inner-spin-button {*/
+  /*!*-webkit-appearance: none;*!*/
+  /*cursor:pointer;*/
+  /*text-align:center;*/
+  /*position:relative;*/
+  /*width: 8px;*/
+  /*height: 14px;*/
+  /*padding: 5px;*/
+  /*transition: ease-in-out .7s;*/
+/*}*/
 
 input[type=button],
 input[type=submit] {

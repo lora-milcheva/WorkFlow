@@ -144,7 +144,7 @@ export class ProjectService {
         {headers: this.createAuthHeaders('Kinvey')}
       )
       .pipe(
-        tap(projects => this.toastr.success(`project updated`)),
+        tap(projects => this.toastr.success(`project saved`)),
         catchError(err => this.handleError(err))
       );
   }

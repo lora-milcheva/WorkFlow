@@ -64,7 +64,7 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadSchedule();
     if (this.project.status === 'closed') {
-      this.status =  true;
+      this.status = true;
     }
   }
 
@@ -86,59 +86,61 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
 
   saveAddedTime() {
     let day = 1;
+    return new Promise((resolve, reject) => {
 
-    // iterate all incoming data
-    for (const time of this.incomingFormData) {
-      if (time !== '' && time !== undefined) {
+      // iterate all incoming data
+      for (const time of this.incomingFormData) {
+        if (time !== '' && time !== undefined && !isNaN(time)) {
 
-        // go through all days in current month
-        for (let currentDay of this.monthSchedule) {
+          // go through all days in current month
+          for (let currentDay of this.monthSchedule) {
+            const dayFromSchedule = currentDay.date.split('/')[1];
+            const date = new Date(this.year, this.month, day).toLocaleString();
+            const workDay = new WorkDayModel(this.projectId, date, time);
 
-          const index = (this.monthSchedule.indexOf(currentDay));
+            // check if current day has existing value from previous project update
+            // if so - update time, if not - create new time
+            if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes !== 0) {
 
-          const dayFromSchedule = currentDay.date.split('/')[1];
-          const date = new Date(this.year, this.month, day).toLocaleString();
-          const workDay = new WorkDayModel(this.projectId, date, time);
-
-          // check if current day has existing value from previous project update
-          // if so - update time, if not - create new time
-          if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes !== 0) {
-
-            // check if new value is zero (in case we want to correct time - say added minutes to the wrong day)
-            // if so - delete time, if not - update time
-            if (Number(time) === 0) {
+              // check if new value is zero (in case we want to correct time - say by mistake we've added minutes to the wrong day)
+              // if so - delete time, if not - update time
+              if (Number(time) === 0) {
+                this.projectService
+                  .deleteWorkTime(currentDay._id)
+                  .subscribe(data => {
+                    console.log('delete');
+                    resolve();
+                  });
+              } else {
+                this.projectService
+                  .updateWorkTime(currentDay._id, workDay)
+                  .subscribe(data => {
+                    console.log('update');
+                    resolve();
+                  });
+              }
+            } else if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes === 0 && Number(time) !== 0) {
               this.projectService
-                .deleteWorkTime(currentDay._id)
+                .saveWorkTime(workDay)
                 .subscribe(data => {
-                  // this.project.totalTime -= currentDay.workTimeInMinutes;
-                  // this.projectService.updateProjectData(this.project);
-                  // this.monthSchedule[index].workTimeInMinutes = data.workTimeInMinutes;
-                });
-            } else {
-              this.projectService
-                .updateWorkTime(currentDay._id, workDay)
-                .subscribe(data => {
-                  // this.project.totalTime -= currentDay.workTimeInMinutes;
-                  // this.project.totalTime += Number(data.workTimeInMinutes);
-                  // this.projectService.updateProjectData(this.project);
-                  // this.monthSchedule[index].workTimeInMinutes = data.workTimeInMinutes;
+                  console.log('new');
+                  resolve();
                 });
             }
-          } else if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes === 0 && Number(time) !== 0) {
-            this.projectService
-              .saveWorkTime(workDay)
-              .subscribe(data => {
-                // this.project.totalTime += Number(data.workTimeInMinutes);
-                // this.projectService.updateProjectData(this.project);
-                // this.monthSchedule[index].workTimeInMinutes = data.workTimeInMinutes;
-              });
           }
         }
+        day++;
       }
-      day++;
-    }
-    this.incomingFormData = [];
-    this.loadSchedule();
+    });
+  }
+
+  async updateView() {
+    await this.saveAddedTime()
+      .then(() => {
+        console.log('after');
+        this.incomingFormData = [];
+        this.loadSchedule();
+      });
   }
 
   loadSchedule() {
@@ -160,7 +162,9 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
 
         for (const obj of this.monthSchedule) {
           for (const obj1 of this.dbSchedule) {
+
             if (obj.date === obj1.date) {
+              console.log(obj1.date);
               const index = this.monthSchedule.findIndex(x => x.date === obj1.date);
               this.monthSchedule[index] = obj1;
             }

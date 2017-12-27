@@ -7,7 +7,7 @@
 
 
   <ul class="navigation">
-    <!--<span *ngIf="user" class="username">logged in as: {{ user }}</span>-->
+    <span *ngIf="user" class="username">logged in as: {{ user }}</span>
     <li *ngIf="authService.isLoggedIn()" class="nav-item"  routerLinkActive="active" >
       <a routerLink="/project/list" class="nav-link">My Dashboard</a>
     </li>

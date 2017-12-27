@@ -25,6 +25,7 @@ export class LoginComponent {
       .login(this.model)
       .subscribe(data => {
           this.successfulLogin(data);
+
         },
         err => {
           this.loginFail = true;
@@ -41,6 +42,7 @@ export class LoginComponent {
     this.authService.authtoken = data['_kmd']['authtoken'];
     localStorage.setItem('authtoken', data['_kmd']['authtoken']);
     localStorage.setItem('username', data['username']);
+    this.authService.updateUsername(data['username']);
     this.loginFail = false;
     this.router.navigate(['/project/list']);
   }

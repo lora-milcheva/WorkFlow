@@ -1,5 +1,8 @@
 <div class="">
-  <p class="month-box"> {{ monthAsString }} {{ year }} </p>
+  <div>
+    <p class="month-box"> <button>&lsaquo;</button> {{ monthAsString }} {{ year }} <button>&rsaquo;</button> </p>
+  </div>
+
 
   <div class="group">
     <div *ngFor="let day of weekdays" class="weekday">
@@ -8,7 +11,7 @@
   </div>
 
   <div class="group">
-    <form (ngSubmit)="saveAddedTime()" #calendarForm="ngForm" class="">
+    <form (ngSubmit)="updateView()" #calendarForm="ngForm" class="">
 
       <div class="group">
 
@@ -18,7 +21,8 @@
           {{ day }}
           <input
             disabled="{{status}}"
-            type="text"
+            type="number"
+            min="0"
             id="{{day}}"
             [(ngModel)]="incomingFormData[day - 1]"
             name="{{day}}"
@@ -34,7 +38,9 @@
       </div>
 
     </form>
+
   </div>
+  <a routerLink="/project/list" class="btn btn-primary">Back</a>
 
 
 </div>

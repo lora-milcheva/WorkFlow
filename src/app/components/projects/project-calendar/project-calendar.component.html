@@ -1,6 +1,10 @@
 <div class="">
   <div>
-    <p class="month-box"> <button>&lsaquo;</button> {{ monthAsString }} {{ year }} <button>&rsaquo;</button> </p>
+    <h3>Current month time: {{currentMonthTime / 60 | floor}}h :  {{currentMonthTime % 60}} min</h3>
+    <h3>Current month price: {{currentMonthTime * project.rate / 60 | floor}} $</h3>
+  </div>
+  <div>
+    <p class="month-box"> <button (click)="loadPreviousMonth()">&lsaquo;</button> {{ monthAsString }} {{ year }} <button (click)="loadNextMonth()">&rsaquo;</button> </p>
   </div>
 
 

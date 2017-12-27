@@ -124,10 +124,23 @@ export class ProjectService {
         catchError(err => this.handleError(err))
       );
   }
-  getProjectTime(projectId: string): Observable<DbWorkDayModel[]> {
+
+  getProjectTime(projectId: string): Observable<WorkDayModel[]> {
     return this.http
-      .get<DbWorkDayModel[]>(
+      .get<WorkDayModel[]>(
         workTimeUrl + `?query={"projectId":"${projectId}"}`,
+        {headers: this.createAuthHeaders('Kinvey')}
+      )
+      .pipe(
+        // tap(projects => this.toastr.success(`schedule loaded`)),
+        catchError(err => this.handleError(err))
+      );
+  }
+
+  getProjectTimeForMonth(projectId: string, month, year): Observable<WorkDayModel[]> {
+    return this.http
+      .get<WorkDayModel[]>(
+        workTimeUrl + `?query={"projectId":"${projectId}", "month":${month}, "year":${year}}`,
         {headers: this.createAuthHeaders('Kinvey')}
       )
       .pipe(

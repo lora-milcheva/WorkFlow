@@ -22,6 +22,7 @@ import { ClientModule } from './components/clients/client.module';
 
 // Pipes
 import { PipesModule } from './core/pipes/pipes.module';
+import { FloorPipe } from './core/pipes/floor-number.pipe';
 
 
 // Components

@@ -8,12 +8,16 @@ import { ProjectModel } from '../../../core/models/project.model';
 import { WorkDayModel } from '../../../core/models/work-day.model';
 import { DbWorkDayModel } from '../../../core/models/db-work-day.model';
 
+// Pipes
+import { FloorPipe } from '../../../core/pipes/floor-number.pipe';
+
 // Services
 import { ProjectService } from '../../../core/services/project/project.service';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './project-calendar.component.html',
+  providers: [FloorPipe],
   styleUrls: ['./project-calendar.component.scss'],
 })
 export class ProjectCalendarComponent implements OnInit, OnDestroy {
@@ -24,7 +28,7 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   public status = false;
 
   public currentDate: Date;
-  public weekday: any;
+  public weekday: number;
   public today: number;
   public month: number;
   public monthAsString: string;
@@ -36,6 +40,7 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   private emptyDays: number[];
   private weekdays: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
+  private currentMonthTime = 0;
   public incomingFormData: any;
 
   constructor(private route: ActivatedRoute,
@@ -45,17 +50,27 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
     this.today = this.currentDate.getDate();
     this.month = this.currentDate.getMonth();
     this.year = this.currentDate.getFullYear();
-    this.weekday = new Date(this.year, this.month, 1).getDay();
+    this.weekday = this.getWeekDay();
 
     this.daysInMonth = [];
     this.monthAsString = this.monthToString(this.month);
     this.monthSchedule = [];
-    this.emptyDays = [];
 
     this.incomingFormData = [];
 
     this.projectId = this.route.snapshot.params['id'];
+    this.getEmptyDays();
+  }
 
+  getWeekDay() {
+    return new Date(this.year, this.month, 1).getDay();
+  }
+
+  getEmptyDays() {
+    this.emptyDays = [];
+    if (this.weekday === 0) {
+      this.weekday = 7;
+    }
     for (let i = 1; i < this.weekday; i++) {
       this.emptyDays.push(i);
     }
@@ -93,14 +108,12 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
         if (time !== '' && time !== undefined && !isNaN(time)) {
 
           // go through all days in current month
-          for (let currentDay of this.monthSchedule) {
-            const dayFromSchedule = currentDay.date.split('/')[1];
-            const date = new Date(this.year, this.month, day).toLocaleString();
-            const workDay = new WorkDayModel(this.projectId, date, time);
+          for (const currentDay of this.monthSchedule) {
+            const workDay = new WorkDayModel(this.projectId, currentDay.day, currentDay.month, currentDay.year, time);
 
             // check if current day has existing value from previous project update
             // if so - update time, if not - create new time
-            if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes !== 0) {
+            if (day === currentDay.day && currentDay.workTimeInMinutes !== 0) {
 
               // check if new value is zero (in case we want to correct time - say by mistake we've added minutes to the wrong day)
               // if so - delete time, if not - update time
@@ -108,22 +121,23 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
                 this.projectService
                   .deleteWorkTime(currentDay._id)
                   .subscribe(data => {
-                    console.log('delete');
+                    this.project.totalTime = this.project.totalTime - currentDay.workTimeInMinutes;
                     resolve();
                   });
               } else {
                 this.projectService
                   .updateWorkTime(currentDay._id, workDay)
                   .subscribe(data => {
-                    console.log('update');
+                    this.project.totalTime = this.project.totalTime - currentDay.workTimeInMinutes;
+                    this.project.totalTime = this.project.totalTime + time;
                     resolve();
                   });
               }
-            } else if (day.toString() === dayFromSchedule && currentDay.workTimeInMinutes === 0 && Number(time) !== 0) {
+            } else if (day === currentDay.day && currentDay.workTimeInMinutes === 0 && Number(time) !== 0) {
               this.projectService
                 .saveWorkTime(workDay)
                 .subscribe(data => {
-                  console.log('new');
+                  this.project.totalTime = this.project.totalTime + time;
                   resolve();
                 });
             }
@@ -143,12 +157,40 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
       });
   }
 
+  loadPreviousMonth() {
+    if (this.month === 0) {
+      this.month = 11;
+      this.year--;
+    } else {
+      this.month--;
+    }
+
+    this.monthAsString = this.monthToString(this.month);
+    this.weekday = this.getWeekDay();
+    this.getEmptyDays();
+    this.loadSchedule();
+  }
+
+  loadNextMonth() {
+    if (this.month === 11) {
+      this.month = 0;
+      this.year++;
+    } else {
+      this.month++;
+    }
+
+    this.monthAsString = this.monthToString(this.month);
+    this.weekday = this.getWeekDay();
+    this.getEmptyDays();
+    this.loadSchedule();
+  }
+
   loadSchedule() {
     this.monthSchedule = [];
     this.daysInMonth = [];
 
     this.projectService
-      .getProjectTime(this.projectId)
+      .getProjectTimeForMonth(this.projectId, this.month, this.year)
       .subscribe(data => {
         this.dbSchedule = data;
 
@@ -156,34 +198,29 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
 
         for (let i = 1; i <= daysInMonth; i++) {
           this.daysInMonth.push(i);
-          const date = new Date(this.year, this.month, i).toLocaleString();
-          this.monthSchedule.push(new WorkDayModel(this.projectId, date, 0));
+          this.monthSchedule.push(new WorkDayModel(this.projectId, i, this.month, this.year, 0));
         }
 
         for (const obj of this.monthSchedule) {
           for (const obj1 of this.dbSchedule) {
 
-            if (obj.date === obj1.date) {
-              console.log(obj1.date);
-              const index = this.monthSchedule.findIndex(x => x.date === obj1.date);
+            if (obj.day === obj1.day) {
+              const index = this.monthSchedule.findIndex(x => x.day === obj1.day);
               this.monthSchedule[index] = obj1;
             }
           }
         }
-        this.calculateTotalTime();
+        this.calculateCurrentMonthTime();
+        this.projectService.updateProjectData(this.project);
       });
   }
 
-  calculateTotalTime() {
-    let time = 0;
+  calculateCurrentMonthTime() {
+    this.currentMonthTime = 0;
 
     for (const obj of this.monthSchedule) {
-      time += Number(obj.workTimeInMinutes);
+      this.currentMonthTime += Number(obj.workTimeInMinutes);
     }
-
-    this.project.totalTime = time;
-    this.projectService.updateProjectData(this.project);
-
   }
 
   updateProject() {

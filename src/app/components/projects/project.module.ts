@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 // Services
 import { ProjectService } from '../../core/services/project/project.service';
 
+// Pipes
+import { PipesModule } from '../../core/pipes/pipes.module';
+
 @NgModule({
   declarations: [
     ...projectComponents
@@ -20,7 +23,8 @@ import { ProjectService } from '../../core/services/project/project.service';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    PipesModule
   ],
   exports: [
     ...projectComponents

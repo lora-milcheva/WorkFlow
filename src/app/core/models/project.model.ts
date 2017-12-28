@@ -6,8 +6,8 @@ export class ProjectModel {
     public budget: number,
     public rate: number,
     public status: string,
-    public dateCreated: Date,
-    public dueDate?: Date,
+    public startDate?: Date,
+    public endDate?: Date,
     public totalTime?: number,
     public workDays?: string[],
     public balance?: number

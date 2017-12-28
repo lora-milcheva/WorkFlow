@@ -46,20 +46,12 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private projectService: ProjectService,
               private router: Router) {
-    this.currentDate = new Date();
-    this.today = this.currentDate.getDate();
-    this.month = this.currentDate.getMonth();
-    this.year = this.currentDate.getFullYear();
-    this.weekday = this.getWeekDay();
 
     this.daysInMonth = [];
-    this.monthAsString = this.monthToString(this.month);
     this.monthSchedule = [];
-
     this.incomingFormData = [];
 
     this.projectId = this.route.snapshot.params['id'];
-    this.getEmptyDays();
   }
 
   getWeekDay() {
@@ -77,6 +69,23 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log(this.month);
+    this.currentDate = new Date();
+    this.today = this.currentDate.getDate();
+    this.month = this.currentDate.getMonth();
+    this.year = this.currentDate.getFullYear();
+
+    const projectLastMonth = new Date (this.project.endDate);
+    console.log(projectLastMonth.getMonth());
+    if (projectLastMonth.getMonth() < this.month) {
+      this.month = projectLastMonth.getMonth();
+      console.log(this.month);
+    }
+
+    this.weekday = this.getWeekDay();
+    this.getEmptyDays();
+    this.monthAsString = this.monthToString(this.month);
+
     this.loadSchedule();
     if (this.project.status === 'closed') {
       this.status = true;
@@ -158,6 +167,10 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   }
 
   loadPreviousMonth() {
+    const start = new Date(this.project.startDate);
+    if (this.month === start.getMonth()) {
+      return;
+    }
     if (this.month === 0) {
       this.month = 11;
       this.year--;
@@ -172,6 +185,10 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   }
 
   loadNextMonth() {
+    const end = new Date(this.project.endDate);
+    if (this.month === end.getMonth()) {
+      return;
+    }
     if (this.month === 11) {
       this.month = 0;
       this.year++;

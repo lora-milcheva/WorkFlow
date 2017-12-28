@@ -37,7 +37,7 @@ export class ProjectService {
     this.projectSource.next(data);
   }
 
-  createProject(data: ProjectModel): Observable<Object> {
+  createProject(data: ProjectModel) {
     return this.http
       .post<ProjectModel>(
         projectsUrl,

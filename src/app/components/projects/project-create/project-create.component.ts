@@ -28,7 +28,7 @@ export class ProjectCreateComponent implements OnInit {
               private clientService: ClientService,
               private router: Router,
               private toastr: ToastsManager) {
-    this.project = new ProjectModel(this.author, '', '', 0, 0, 'active', new Date());
+    this.project = new ProjectModel(this.author, '', '', 0, 0, 'active');
     this.project.totalTime = 0;
     this.clients = [];
   }
@@ -44,9 +44,22 @@ export class ProjectCreateComponent implements OnInit {
     } else {
       this.projectService
         .createProject(this.project)
-        .subscribe(data => {
+        .subscribe(project => {
+          console.log(project._id);
+          this.clientService
+            .findClientByName(this.project.client)
+            .subscribe(client => {
+              console.log(client);
+              client[0].projectsById.push(project._id);
+              this.clientService
+                .save(client[0])
+                .subscribe(data => {
+                  console.log(data);
+                });
+            });
           this.router.navigate(['project/list']);
         });
+
     }
   }
 

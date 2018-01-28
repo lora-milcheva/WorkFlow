@@ -13,6 +13,7 @@ import { WorkDayModel } from '../../../core/models/work-day.model';
 // Services
 import { ProjectService } from '../../../core/services/project/project.service';
 import { AuthenticationService } from '../../../core/services/authentication/auth.service';
+import { ClientService } from '../../../core/services/client/client.service';
 
 import { PipesModule } from '../../../core/pipes/pipes.module';
 
@@ -36,6 +37,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   constructor(private projectService: ProjectService,
               private authService: AuthenticationService,
+              private clientService: ClientService,
               private route: ActivatedRoute,
               private router: Router) {
     this.projectId = this.route.snapshot.params['id'];
@@ -98,12 +100,22 @@ export class ProjectDetailsComponent implements OnInit {
       .subscribe(data => {
       });
 
+    this.clientService
+      .findClientById(this.project.clientId)
+      .subscribe(response => {
+        const client = response[0];
+        client.projectsById =  client.projectsById.filter(item => item !== this.projectId)
+
+        this.clientService
+          .save(client)
+          .subscribe(data => {
+          });
+      });
     this.projectService
       .deleteProjectWorkDays(this.projectId)
-      .subscribe(data => {
-        console.log(data);
+      .subscribe(res => {
+        this.projectService.updateDeleteStatus(true);
+        this.router.navigate(['/project/list']);
       });
-
-    this.router.navigate(['/project/list']);
   }
 }

@@ -28,7 +28,7 @@ export class ProjectCreateComponent implements OnInit {
               private clientService: ClientService,
               private router: Router,
               private toastr: ToastsManager) {
-    this.project = new ProjectModel(this.author, '', '', 0, 0, 'active');
+    this.project = new ProjectModel(this.author, '', '', '', 0, 0, 'active', new Date());
     this.project.totalTime = 0;
     this.clients = [];
   }
@@ -42,24 +42,21 @@ export class ProjectCreateComponent implements OnInit {
     if (this.project.name.trim() === '') {
       this.toastr.warning('Project name required!');
     } else {
-      this.projectService
-        .createProject(this.project)
-        .subscribe(project => {
-          console.log(project._id);
-          this.clientService
-            .findClientByName(this.project.client)
-            .subscribe(client => {
-              console.log(client);
+      this.clientService
+        .findClientByName(this.project.client)
+        .subscribe(client => {
+          this.project.clientId = client[0]._id;
+          this.projectService
+            .createProject(this.project)
+            .subscribe(project => {
               client[0].projectsById.push(project._id);
               this.clientService
                 .save(client[0])
                 .subscribe(data => {
-                  console.log(data);
                 });
+              this.router.navigate(['project/list']);
             });
-          this.router.navigate(['project/list']);
         });
-
     }
   }
 
@@ -72,7 +69,7 @@ export class ProjectCreateComponent implements OnInit {
   }
 
   clearForm() {
-    this.project = new ProjectModel(this.author, '', '', 0, 0, 'active', new Date());
+    this.project = new ProjectModel(this.author, '', '', '', 0, 0, 'active', new Date());
   }
 }
 

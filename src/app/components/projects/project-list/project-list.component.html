@@ -19,49 +19,36 @@
   <hr>
 
   <div *ngFor="let project of activeProjects" class="">
+
     <a routerLink="/project/details/{{project._id}}">
-      <div class="project-box">
-
-        <span class="status active">A</span>
-
-        <div class="details">
+        <div class="project-box">
+          <span class="status active">A</span>
           <h4>{{project.name}}</h4>
           <h5>{{project.client}}</h5>
-        </div>
-
-        <div class="details">
-          Budget:
-          <span class="money">
-            {{project.budget}}
-            <span class="currency">BGN</span>
-          </span>
-        </div>
-
-        <div class="details">
-          Cost:
-          <span class="money">
-            {{ project.totalTime * project.rate / 60 | number }}
-            <span class="currency">BGN</span>
-          </span>
-        </div>
-
-        <div class="details">
-          Balance:
-          <span
-            class="money plus"
-            [ngClass]="{'minus': project.budget - ( project.totalTime * project.rate / 60 ) <= 0}">
+          <p>
+            <span class="details">Budget:</span>
+            <span class="right"> {{project.budget}} <span class="currency">BGN</span></span>
+          </p>
+          <p>
+            <span class="details">Cost:</span>
+            <span class="right"> {{ project.totalTime * project.rate / 60 | number }} <span class="currency">BGN</span></span>
+          </p>
+          <p>
+            <span class="details">Balance:</span>
+            <span class=" right plus"
+                  [ngClass]="{'minus': project.budget - ( project.totalTime * project.rate / 60 ) <= 0}">
             {{project.budget - ( project.totalTime * project.rate / 60 ) | number }}
             <span class="currency">BGN</span>
           </span>
+          </p>
         </div>
-
-      </div>
-    </a>
+      </a>
   </div>
 </div>
 
+<div class="clear"></div>
 
-<div class="">
+<div class="section">
   <h3 class="">Closed projects</h3>
 
   <div *ngFor="let project of closedProjects">

@@ -22,6 +22,7 @@ import { ProjectService } from '../../../core/services/project/project.service';
 })
 export class ProjectCalendarComponent implements OnInit, OnDestroy {
   @Input() project: ProjectModel;
+  @Input() forDelete: boolean;
   @Output() notify: EventEmitter<ProjectModel> = new EventEmitter<ProjectModel>();
 
   public projectId: string;
@@ -52,6 +53,51 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
     this.incomingFormData = [];
 
     this.projectId = this.route.snapshot.params['id'];
+
+    this.projectService.forDeleteReceived$.subscribe(data => {
+      this.forDelete = data;
+    });
+  }
+
+  ngOnInit() {
+
+    this.currentDate = new Date();
+    this.today = this.currentDate.getDate();
+    this.month = this.currentDate.getMonth();
+    this.year = this.currentDate.getFullYear();
+
+    const projectEndtDate = new Date(this.project.endDate);
+    const projectStartDate = new Date(this.project.startDate);
+    console.log('test');
+
+    if (projectEndtDate.getFullYear() < this.year) {
+      this.year = projectEndtDate.getFullYear();
+      this.month = projectStartDate.getMonth();
+      console.log('first');
+    } else if (projectStartDate.getFullYear() > this.year) {
+      this.year = projectStartDate.getFullYear();
+      this.month = projectStartDate.getMonth();
+      console.log('second');
+    } else if (projectEndtDate.getMonth() < this.month) {
+      this.month = projectEndtDate.getMonth();
+      this.year = projectEndtDate.getFullYear();
+      console.log('third');
+    }
+
+    this.weekday = this.getWeekDay();
+    this.getEmptyDays();
+    this.monthAsString = this.monthToString(this.month);
+
+    this.loadSchedule();
+    if (this.project.status === 'closed') {
+      this.status = true;
+    }
+  }
+
+  ngOnDestroy() {
+    if (!this.forDelete) {
+      this.updateProject();
+    }
   }
 
   getWeekDay() {
@@ -66,34 +112,6 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
     for (let i = 1; i < this.weekday; i++) {
       this.emptyDays.push(i);
     }
-  }
-
-  ngOnInit() {
-    console.log(this.month);
-    this.currentDate = new Date();
-    this.today = this.currentDate.getDate();
-    this.month = this.currentDate.getMonth();
-    this.year = this.currentDate.getFullYear();
-
-    const projectLastMonth = new Date (this.project.endDate);
-    console.log(projectLastMonth.getMonth());
-    if (projectLastMonth.getMonth() < this.month) {
-      this.month = projectLastMonth.getMonth();
-      console.log(this.month);
-    }
-
-    this.weekday = this.getWeekDay();
-    this.getEmptyDays();
-    this.monthAsString = this.monthToString(this.month);
-
-    this.loadSchedule();
-    if (this.project.status === 'closed') {
-      this.status = true;
-    }
-  }
-
-  ngOnDestroy() {
-    this.updateProject();
   }
 
   getDaysInMonth(year, month) {
@@ -160,7 +178,6 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   async updateView() {
     await this.saveAddedTime()
       .then(() => {
-        console.log('after');
         this.incomingFormData = [];
         this.loadSchedule();
       });

@@ -47,5 +47,4 @@ export class ProjectEditComponent implements OnInit {
         this.router.navigate(['project/details/' + this.projectId]);
       });
   }
-
 }

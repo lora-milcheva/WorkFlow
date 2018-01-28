@@ -29,12 +29,19 @@ export class ProjectService {
   private projectSource = new Subject<any>();
   projectReceived$ = this.projectSource.asObservable();
 
+  private forDeleteSource = new Subject<boolean>();
+  forDeleteReceived$ = this.forDeleteSource.asObservable();
+
   constructor(private http: HttpClient,
               private toastr: ToastsManager) {
   }
 
   updateProjectData(data) {
     this.projectSource.next(data);
+  }
+
+  updateDeleteStatus(data) {
+    this.forDeleteSource.next(data);
   }
 
   createProject(data: ProjectModel) {
@@ -51,7 +58,7 @@ export class ProjectService {
   }
 
   loadCurrentUserProjects(): Observable<ProjectModel[]> {
-    let username = localStorage.getItem('username');
+    const username = localStorage.getItem('username');
     return this.http
       .get<ProjectModel[]>(
         projectsUrl + '/' + `?query={"creator":"${username}"}`,
@@ -163,7 +170,6 @@ export class ProjectService {
   }
 
   deleteProject(projectId: string) {
-    console.log('from delete service');
     return this.http
       .delete(
         projectsUrl + '/' + projectId,
@@ -176,7 +182,6 @@ export class ProjectService {
   }
 
   deleteProjectWorkDays(projectId: string) {
-    console.log('from delete time service');
     return this.http
       .delete(
         workTimeUrl  + `?query={"projectId":"${projectId}"}`,

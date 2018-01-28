@@ -40,10 +40,22 @@ export class ClientService {
       );
   }
 
-  findClientByName(clientName: string): Observable<ClientModel> {
+  findClientByName(clientName: string): Observable<any> {
     return this.http
       .get<ClientModel>(
         clientsUrl + `?query={"name":"${clientName}"}`,
+        {headers: this.createAuthHeaders('Kinvey')}
+      )
+      .pipe(
+        tap(client => this.toastr.success(`client found`)),
+        catchError(err => this.handleError(err))
+      );
+  }
+
+  findClientById(clientId: string): Observable<any> {
+    return this.http
+      .get<ClientModel>(
+        clientsUrl + `?query={"_id":"${clientId}"}`,
         {headers: this.createAuthHeaders('Kinvey')}
       )
       .pipe(
@@ -65,7 +77,6 @@ export class ClientService {
   }
 
   save(client: any): Observable<ClientModel> {
-    console.log(client);
     return this.http
       .put<ClientModel>(
         clientsUrl + '/' + client._id,
@@ -73,7 +84,7 @@ export class ClientService {
         {headers: this.createAuthHeaders('Kinvey')}
       )
       .pipe(
-        tap(projects => this.toastr.success(`client created`)),
+        tap(projects => this.toastr.success(`client saved`)),
         catchError(err => this.handleError(err))
       );
   }

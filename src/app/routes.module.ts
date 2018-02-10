@@ -10,6 +10,7 @@ import { ProjectListComponent } from './components/projects/project-list/project
 import { ProjectCreateComponent } from './components/projects/project-create/project-create.component';
 import { ProjectEditComponent } from './components/projects/project-edit/project-edit.component';
 import { ClientCreateComponent } from './components/clients/client-create/client-create.component';
+import { ClientDetailsComponent } from './components/clients/client-details/client-details.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
 
 
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'project/details/:id', canActivate: [AuthGuard], component: ProjectDetailsComponent },
   { path: 'project/edit/:id', canActivate: [AuthGuard], component: ProjectEditComponent },
   { path: 'client/create', canActivate: [AuthGuard], component: ClientCreateComponent },
+  { path: 'client/details/:id', canActivate: [AuthGuard], component: ClientDetailsComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

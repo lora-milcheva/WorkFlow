@@ -94,6 +94,18 @@ export class ProjectService {
       );
   }
 
+  getProjectsByClient(clientId: string): Observable<ProjectModel[]> {
+    return this.http
+      .get<ProjectModel>(
+        projectsUrl + '/' + `?query={"clientId":"${clientId}"}`,
+        {headers: this.createAuthHeaders('Kinvey')}
+      )
+      .pipe(
+        // tap(projects => this.toastr.success(`projects loaded`)),
+        catchError(err => this.handleError(err))
+      );
+  }
+
   saveWorkTime(data: WorkDayModel): Observable<WorkDayModel> {
     return this.http
       .post<WorkDayModel>(

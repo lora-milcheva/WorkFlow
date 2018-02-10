@@ -20,19 +20,6 @@
         </div>
 
         <div class="form-group">
-          <label for="client">Client</label>
-          <select class="form-control"
-                  id="client"
-                  required
-                  disabled
-                  [(ngModel)]="project.client"
-                  name="client"
-                  #client="ngModel">
-            <option *ngFor="let client of clients" [value]="client"> {{client}}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label for="name">Project rate</label>
           <input type="number"
                  class="form-control"

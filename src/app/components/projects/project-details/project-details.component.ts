@@ -104,13 +104,14 @@ export class ProjectDetailsComponent implements OnInit {
       .findClientById(this.project.clientId)
       .subscribe(response => {
         const client = response[0];
-        client.projectsById =  client.projectsById.filter(item => item !== this.projectId)
+        client.projectsById = client.projectsById.filter(item => item !== this.projectId)
 
         this.clientService
           .save(client)
           .subscribe(data => {
           });
       });
+
     this.projectService
       .deleteProjectWorkDays(this.projectId)
       .subscribe(res => {

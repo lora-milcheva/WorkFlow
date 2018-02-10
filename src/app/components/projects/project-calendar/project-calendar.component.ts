@@ -60,7 +60,6 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.currentDate = new Date();
     this.today = this.currentDate.getDate();
     this.month = this.currentDate.getMonth();
@@ -68,20 +67,16 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
 
     const projectEndtDate = new Date(this.project.endDate);
     const projectStartDate = new Date(this.project.startDate);
-    console.log('test');
 
     if (projectEndtDate.getFullYear() < this.year) {
       this.year = projectEndtDate.getFullYear();
       this.month = projectStartDate.getMonth();
-      console.log('first');
     } else if (projectStartDate.getFullYear() > this.year) {
       this.year = projectStartDate.getFullYear();
       this.month = projectStartDate.getMonth();
-      console.log('second');
     } else if (projectEndtDate.getMonth() < this.month) {
       this.month = projectEndtDate.getMonth();
       this.year = projectEndtDate.getFullYear();
-      console.log('third');
     }
 
     this.weekday = this.getWeekDay();
@@ -95,7 +90,7 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (!this.forDelete) {
+    if (!this.forDelete && this.project.status === 'active') {
       this.updateProject();
     }
   }

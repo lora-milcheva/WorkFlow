@@ -1,16 +1,19 @@
 <div class="">
   <div>
-    <h3>Current month time: {{currentMonthTime / 60 | floor}}h :  {{currentMonthTime % 60}} min</h3>
-    <h3>Current month price: {{currentMonthTime * project.rate / 60 | floor}} $</h3>
+    <h5>Current month time: {{currentMonthTime / 60 | floor}} hrs : {{currentMonthTime % 60}} min ({{currentMonthTime}}
+      min)</h5>
+    <h5>Current month price: {{currentMonthTime * project.rate / 60 | floor}} $</h5>
   </div>
-  <div>
-    <p class="month-box"> <button (click)="loadPreviousMonth()">&lsaquo;</button> {{ monthAsString }} {{ year }} <button (click)="loadNextMonth()">&rsaquo;</button> </p>
+  <div class="month-box">
+    <button (click)="loadPreviousMonth()" class="btn btn-primary">&lsaquo;</button>
+    <p> {{ monthAsString }} {{ year }} </p>
+    <button (click)="loadNextMonth()" class="btn btn-primary">&rsaquo;</button>
   </div>
 
 
   <div class="group">
     <div *ngFor="let day of weekdays" class="weekday">
-      {{ day }}
+      <p>{{ day }}</p>
     </div>
   </div>
 
@@ -32,7 +35,7 @@
             name="{{day}}"
             class="add-time-input"
             [ngClass]="{'has-value': monthSchedule[day - 1].workTimeInMinutes !== 0}"
-            placeholder="{{(monthSchedule[day - 1].workTimeInMinutes)}} min" />
+            placeholder="{{(monthSchedule[day - 1].workTimeInMinutes)}} min"/>
         </div>
 
       </div>

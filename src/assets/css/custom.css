@@ -1,5 +1,16 @@
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 
+
+@font-face {
+  font-family: myFirstFont;
+  src: url('https://fonts.googleapis.com/css?family=Titillium+Web');
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
 /*ClearFix*/
 .group:before,
 .group:after {
@@ -15,22 +26,13 @@
   zoom: 1; /* For IE 6/7 (trigger hasLayout) */
 }
 
-.container {
-  /*background-color: #fff;*/
-  padding: 3em 3em 1em 3em;
-}
 
-@font-face {
-  font-family: myFirstFont;
-  src: url('https://fonts.googleapis.com/css?family=Titillium+Web');
-}
-
-/*@import url('https://fonts.googleapis.com/css?family=Titillium+Web');*/
 body {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Lato', sans-serif;
   color: #9c9c9c;
-  background-color: #575757;
-  transition: .3s;
+  background-color: #ffffff;
+  transition: .2s;
+  font-size: 14px;
 }
 
 a {
@@ -38,30 +40,31 @@ a {
 }
 a, a:hover, a:visited, a:focus {
   text-decoration: none;
+  color: inherit;
 }
 
 h1 {
-  font-size: 26px;
+  font-size: 2em;
   margin-bottom: .5em;
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 1.5em;
   margin-bottom: .5em;
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 1.3em;
   margin-bottom: .5em;
 }
 
 h4 {
-  font-size: 16px;
+  font-size: 1.2em;
   margin-bottom: .5em;
 }
 
 h5 {
-  font-size: 14px;
+  font-size: 1.1em;
   margin-bottom: .5em;
 }
 
@@ -72,9 +75,18 @@ p {
 
 /*Common*/
 hr {
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: rgba(0, 0, 0, 0.1);
   height: 1px;
   border: 0;
+}
+
+#content {
+  width: 90%;
+  margin: auto;
+}
+.container {
+  /*background-color: #fff;*/
+  padding: 3em 3em 1em 3em;
 }
 
 .right {
@@ -86,9 +98,10 @@ hr {
 }
 
 
-/*Buttons*/
+/*  -----  Buttons  -----  */
 button {
   border: none;
+  outline: none;
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -109,25 +122,24 @@ button {
 }
 
 
-.btn-default {
-  background-color: #38c488;
-  color: #575757 !important;
+.btn-primary {
+  background-color: #0db273;
+  color: #ffffff;
   box-shadow: none;
 }
 
-.btn-default:hover {
-  color: #ffffff !important;
-  background-color: rgba(56, 196, 136, 0.7);
+.btn-primary:hover {
+  background-color: #0f824b;
   /*animation-name: bounce !important;*/
   /*-moz-animation-name: bounce !important;*/
 }
 
-.btn-primary {
-  background-color: #606060;
+.btn-default {
+  background-color: #eaeaea;
   color: #9c9c9c;
 }
 
-.btn-primary:hover {
+.btn-default:hover {
   /*background-color: #0db273;*/
   background-color: #6e6e6e;
   color: #fff;
@@ -181,10 +193,9 @@ button {
 }
 
 
-/*Forms*/
+/*  -----  Forms  -----  */
 .form-container {
   width: 35%;
-  margin: auto !important;
   margin: 0;
 }
 

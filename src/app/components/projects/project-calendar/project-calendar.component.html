@@ -1,67 +1,80 @@
 <div class="calendar-container">
 
-  <div class="current-month-summary">
-    <p class="current-month-time">Current month time:
-      <span class="value">{{currentMonthTime / 60 | floor}} hrs : {{currentMonthTime % 60}} min </span>
-    </p>
-    <p>Total minutes:
-      <span class="value"> ({{currentMonthTime}} min)</span>
-    </p>
-    <p class="current-month-price">Current month price:
-      <span class="value currency">{{currentMonthTime * project.rate / 60 | floor}}</span>
-    </p>
-    <p class="current-month-budget">Current month budget:
-      <span class="value currency">{{project.budget / 12}}</span></p>
-    <p class="current-month-budget">Current month balance:
-      <span class="value currency"> {{1200 - (currentMonthTime * project.rate / 60) |
-      floor}} </span>
-    </p>
-  </div>
-  <div></div>
-  <div class="month-box">
-    <button (click)="loadPreviousMonth()" class="btn btn-primary">&lsaquo;</button>
-    <p> {{ monthAsString }} {{ year }} </p>
-    <button (click)="loadNextMonth()" class="btn btn-primary">&rsaquo;</button>
-  </div>
-
-
-  <div class="group">
-    <div *ngFor="let day of weekdays" class="weekday">
-      <p>{{ day }}</p>
+  <aside>
+    <h3>Current month details</h3>
+    <div class="current-month-summary">
+      <p class="current-month-time">Current month time:
+        <span class="value">{{currentMonthTime / 60 | floor}} hrs : {{currentMonthTime % 60}} min </span>
+      </p>
+      <p>Total minutes:
+        <span class="value"> ({{currentMonthTime}} min)</span>
+      </p>
+      <p class="current-month-price">Current month labour price:
+        <span class="value currency">{{currentMonthTime * project.rate / 60 | floor}}</span>
+      </p>
+      <p class="current-month-budget ">Current month budget:
+        <span class="value currency">{{project.budget / 12}}</span>
+      </p>
     </div>
-  </div>
 
-  <div class="group">
-    <form (ngSubmit)="updateView()" #calendarForm="ngForm" class="">
+    <div class="current-month-summary">
+      <p class="current-month-budget">Current month balance:
+        <span class="value currency result"> {{1200 - (currentMonthTime * project.rate / 60) |
+      floor}} </span>
+      </p>
+    </div>
+    <div class="group"></div>
+  </aside>
 
-      <div class="group">
+  <main>
+    <div class="month-box">
+      <button (click)="loadPreviousMonth()" class="btn btn-primary">&lsaquo;</button>
+      <p> {{ monthAsString }} {{ year }} </p>
+      <button (click)="loadNextMonth()" class="btn btn-primary">&rsaquo;</button>
+    </div>
 
-        <div *ngFor="let day of emptyDays" class="date-box empty"></div>
 
-        <div *ngFor="let day of daysInMonth" class="date-box">
-          {{ day }}
-          <input
-            disabled="{{status}}"
-            type="number"
-            min="0"
-            id="{{day}}"
-            [(ngModel)]="incomingFormData[day - 1]"
-            name="{{day}}"
-            class="add-time-input"
-            [ngClass]="{'has-value': monthSchedule[day - 1].workTimeInMinutes !== 0}"
-            placeholder="{{(monthSchedule[day - 1].workTimeInMinutes)}} min"/>
+    <div class="group">
+      <div *ngFor="let day of weekdays" class="weekday">
+        <p>{{ day }}</p>
+      </div>
+    </div>
+
+    <div class="group">
+      <form (ngSubmit)="updateView()" #calendarForm="ngForm" class="">
+
+        <div class="group">
+
+          <div *ngFor="let day of emptyDays" class="date-box empty"></div>
+
+          <div *ngFor="let day of daysInMonth" class="date-box">
+            <span class="month-day">{{ day }}</span>
+            <input
+              disabled="{{status}}"
+              type="number"
+              min="0"
+              id="{{day}}"
+              [(ngModel)]="incomingFormData[day - 1]"
+              name="{{day}}"
+              class="add-time-input"
+              [ngClass]="{'has-value': monthSchedule[day - 1].workTimeInMinutes !== 0}"
+              placeholder="{{(monthSchedule[day - 1].workTimeInMinutes)}} min"/>
+          </div>
+
         </div>
 
-      </div>
+        <div *ngIf="project.status === 'active'" class="buttons-section">
+          <a routerLink="/project/list" class="btn btn-default">Back</a>
+          <input type="submit" class="btn btn-primary right " value="Update Time">
+        </div>
 
-      <div *ngIf="project.status === 'active' " class="buttons-section">
-        <input type="submit" class="btn btn-default right " value="Update Time">
-      </div>
+      </form>
 
-    </form>
+    </div>
+  </main>
 
-  </div>
-  <a routerLink="/project/list" class="btn btn-primary">Back</a>
+
+
 
 
 </div>

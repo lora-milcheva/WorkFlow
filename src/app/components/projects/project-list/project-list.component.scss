@@ -7,25 +7,25 @@ $active-color: #bee854;
 $white-color: #fff;
 
 .project-box {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.35);;
+  //border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   padding: 1em;
-  width: 23%;
-  margin: 1%;
+  color: $light-grey-color;
+  width: 24%;
+  margin: .5%;
   display: inline-block;
   float: left;
-  transition: ease-in-out .2s;
 }
 
 .project-box:hover {
   background-color: $dark-grey-color;
+  transition: ease-in-out .2s;
+}
+
+.project-box h4 {
+  color: #000;
 }
 
 .project-box:hover h4 {
-  color: $active-color;
-  transition: ease-in-out .1s;
-}
-
-.project-box:hover .details-section {
   color: $active-color;
   transition: ease-in-out .1s;
 }
@@ -34,14 +34,9 @@ $white-color: #fff;
   padding: 10px 0;
 }
 
-.details-section {
-  margin-top: 3em;
-  //color: #252525;
-}
-
 .details {
   display: inline-block;
-  min-width: 150px !important;
+  min-width: 150px;
   margin-right: 30px;
 }
 
@@ -60,6 +55,7 @@ $white-color: #fff;
 
 .currency {
   font-size: .7em;
+  color: $light-grey-color;
 }
 
 .status {
@@ -85,7 +81,7 @@ $white-color: #fff;
 }
 
 .section {
-  //background-color: #f2f2f2;
+  /*background-color: #f2f2f2;*/
   margin: 2em 0;
   padding: 0 0 3em 0;
 }
@@ -102,10 +98,5 @@ $white-color: #fff;
 
 .client {
   color: #252525;
+  margin-bottom: 15px;
 }
-
-.client:hover {
-  color: #fff;
-  transition: ease-in-out .1s;
-}
-

@@ -1,9 +1,23 @@
-<div class="">
-  <div>
-    <h5>Current month time: {{currentMonthTime / 60 | floor}} hrs : {{currentMonthTime % 60}} min ({{currentMonthTime}}
-      min)</h5>
-    <h5>Current month price: {{currentMonthTime * project.rate / 60 | floor}} $</h5>
+<div class="calendar-container">
+
+  <div class="current-month-summary">
+    <p class="current-month-time">Current month time:
+      <span class="value">{{currentMonthTime / 60 | floor}} hrs : {{currentMonthTime % 60}} min </span>
+    </p>
+    <p>Total minutes:
+      <span class="value"> ({{currentMonthTime}} min)</span>
+    </p>
+    <p class="current-month-price">Current month price:
+      <span class="value currency">{{currentMonthTime * project.rate / 60 | floor}}</span>
+    </p>
+    <p class="current-month-budget">Current month budget:
+      <span class="value currency">{{project.budget / 12}}</span></p>
+    <p class="current-month-budget">Current month balance:
+      <span class="value currency"> {{1200 - (currentMonthTime * project.rate / 60) |
+      floor}} </span>
+    </p>
   </div>
+  <div></div>
   <div class="month-box">
     <button (click)="loadPreviousMonth()" class="btn btn-primary">&lsaquo;</button>
     <p> {{ monthAsString }} {{ year }} </p>

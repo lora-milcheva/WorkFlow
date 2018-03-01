@@ -97,3 +97,24 @@ input::-webkit-inner-spin-button {
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
+
+// Current Month Summary //
+.current-month-summary {
+  //background-color: #d6d6d6;
+  padding: 25px 0;
+  width: 300px;
+}
+
+.current-month-summary p {
+  font-size: 1.2em;
+}
+
+.currency::after {
+  content: ' лв.';
+  font-size: .8em;
+}
+
+.value {
+  float: right;
+}
+

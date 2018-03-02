@@ -63,8 +63,9 @@ main {
   display: inline-block;
   width: 250px;
   padding: 0 1em;
+  text-align: center;
   font-size: 1.5em;
-  color: $secondary-color;
+  color: #000;
 }
 
 .month-box .btn {
@@ -74,14 +75,13 @@ main {
 
 
 // --- Month Table Formatting --- //
-
 .weekday {
   display: inline-block;
   width: 13.25%;;
   height: 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   /*background-color: #fafafa;*/
-  color: $secondary-color;
+  color: #000;
   padding: 0 10px 0 10px;
   margin: .5%;
   font-size: .8em;
@@ -105,7 +105,6 @@ main {
   background-color: transparent;
   padding: 5px;
   border: none;
-
   color: #11a8bc;
   font-size: .8em;
   font-family: 'Titillium Web', sans-serif;
@@ -127,8 +126,12 @@ input::placeholder {
 }
 
 .buttons-section {
-  margin-top: 25px;
   padding-top: 20px;
+  text-align: center;
+}
+
+.btn-submit {
+  width: 60%;
 }
 
 .empty {

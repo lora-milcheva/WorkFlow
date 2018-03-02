@@ -19,7 +19,8 @@ $white-color: #fff;
   padding: 1em;
   color: $light-grey-color;
   flex-basis: 250px;
-  flex-grow: 1;
+  //max-width: 4000px;
+  flex-grow: .3;
   margin: 10px 35px;
 }
 

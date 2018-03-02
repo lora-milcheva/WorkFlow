@@ -1,4 +1,6 @@
-<div class="calendar-container">
+<div *ngIf="monthSchedule.length === 0" class="loader"></div>
+
+<div *ngIf="monthSchedule.length !== 0" class="calendar-container">
 
   <aside>
     <h3>Current month details</h3>
@@ -10,23 +12,24 @@
         <span class="value"> ({{currentMonthTime}} min)</span>
       </p>
       <p class="current-month-price">Current month labour price:
-        <span class="value currency">{{currentMonthTime * project.rate / 60 | floor}}</span>
+        <span class="value currency">{{currentMonthTime * project.rate / 60 | floor | number}}</span>
       </p>
       <p class="current-month-budget ">Current month budget:
-        <span class="value currency">{{project.budget / 12}}</span>
+        <span class="value currency">{{project.budget / 12 | number}}</span>
       </p>
     </div>
 
     <div class="current-month-summary">
       <p class="current-month-budget">Current month balance:
-        <span class="value currency result"> {{1200 - (currentMonthTime * project.rate / 60) |
-      floor}} </span>
+        <span
+          class="value currency result"> {{1200 - (currentMonthTime * project.rate / 60) | floor | number}} </span>
       </p>
     </div>
     <div class="group"></div>
   </aside>
 
   <main>
+
     <div class="month-box">
       <button (click)="loadPreviousMonth()" class="btn btn-primary">&lsaquo;</button>
       <p> {{ monthAsString }} {{ year }} </p>
@@ -44,7 +47,6 @@
       <form (ngSubmit)="updateView()" #calendarForm="ngForm" class="">
 
         <div class="group">
-
           <div *ngFor="let day of emptyDays" class="date-box empty"></div>
 
           <div *ngFor="let day of daysInMonth" class="date-box">
@@ -64,17 +66,13 @@
         </div>
 
         <div *ngIf="project.status === 'active'" class="buttons-section">
-          <a routerLink="/project/list" class="btn btn-default">Back</a>
-          <input type="submit" class="btn btn-primary right " value="Update Time">
+          <input type="submit" class="btn btn-primary btn-submit" value="Update Time">
         </div>
 
       </form>
 
     </div>
+
   </main>
-
-
-
-
 
 </div>

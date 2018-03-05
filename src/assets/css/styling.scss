@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=cyrillic,cyrillic-ext,latin-ext');
-
 //@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
-
-
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 
 $primary: #0db273;
@@ -27,14 +24,21 @@ html {
 }
 
 body {
-  position:relative;
+  position: relative;
   min-height: 100%;
   font-family: 'Lato', sans-serif;
   color: $default-text;
   transition: .2s;
   font-size: 14px;
 }
-body::after{ content:''; display:block; height:100px; } //To manage footer position
+
+body::after {
+  content: '';
+  display: block;
+  height: 100px;
+}
+
+//To manage footer position
 
 a {
   color: $medium-grey;
@@ -44,7 +48,6 @@ a, a:hover, a:active, a:visited {
   text-decoration: none;
   color: inherit;
 }
-
 
 h1, h2, h3, h4, h5, p {
   margin: .5em 0;
@@ -106,6 +109,7 @@ hr {
 
 .projects-list {
   margin: 25px 0;
+  position: relative;
 }
 
 //*  -----  Buttons  -----  *//
@@ -348,8 +352,6 @@ input[type=submit] {
   color: $light-grey;
 }
 
-
-
 //* ------ Project & Client List Styling ------ *//
 .projects-container {
   display: flex;
@@ -424,7 +426,7 @@ input[type=submit] {
   color: $default-text;
 }
 
-.project-details-container{
+.project-details-container {
   margin-top: 15px;
 }
 
@@ -432,11 +434,17 @@ input[type=submit] {
 }
 
 .plus {
-  color: $positive;
+  display: inline-block;
+  padding: 5px;
+  background-color: $positive;
+  color: $white;
 }
 
 .minus {
-  color: $danger;
+  display: inline-block;
+  padding: 5px;
+  background-color: $danger;
+  color: $white;
 }
 
 .status {
@@ -481,7 +489,6 @@ input[type=submit] {
   color: $default-text;
   border-left: 1px solid $light-background;
 }
-
 
 .summary-text {
   padding: 10px 0 0 0;
@@ -540,7 +547,6 @@ main {
   width: calc(100% - 325px);
 }
 
-
 // --- Months Display --- //
 .month-box {
   width: 100%;
@@ -579,25 +585,42 @@ main {
   display: inline-block;
   width: 13.25%;
   height: 80px;
-  background-color: $light-background;
+  background-color: #f5fff3;
+  background-color: #f8f8f8;
+  background-color: #f7f6f399;
   color: $primary;
-  padding: 15px 10px;
+  padding: 12px 10px;
   margin: .5%;
   font-size: larger;
   float: left;
 }
 
+.date-box:nth-child(6):not(.empty),
+.date-box:nth-child(7):not(.empty),
+.date-box:nth-child(13):not(.empty),
+.date-box:nth-child(14):not(.empty),
+.date-box:nth-child(20):not(.empty),
+.date-box:nth-child(21):not(.empty),
+.date-box:nth-child(27):not(.empty),
+.date-box:nth-child(28):not(.empty),
+.date-box:nth-child(34):not(.empty),
+.date-box:nth-child(35):not(.empty) {
+  background-color: #e9ffdb;
+  background-color: #fff2db;
+  background-color: #f7f6f3;
+}
+
 .add-time-input {
-   margin-top: .7em;
-   width: 100%;
-   background-color: transparent;
-   padding: 5px 2px;
-   border: none;
-   color: #11a8bc;
-   font-size: .8em;
-   font-family: 'Titillium Web', sans-serif;
-   transition: ease-in-out .3s;
- }
+  margin-top: .7em;
+  width: 100%;
+  background-color: transparent;
+  padding: 5px 2px;
+  border: none;
+  color: #11a8bc;
+  font-size: .8em;
+  //font-family: 'Titillium Web', sans-serif;
+  transition: ease-in-out .3s;
+}
 
 .add-time-input:focus {
   padding: 5px 7px;
@@ -607,8 +630,8 @@ main {
   margin-left: 3px;
 }
 
-input::placeholder {
-  color: #dddddd;
+.add-time-input::placeholder {
+  color: #d8d9ca;
 }
 
 .add-time-input:focus {
@@ -642,16 +665,14 @@ input::-webkit-inner-spin-button {
 
 //* ------ Footer Styling ------ *//
 footer {
-  position:absolute;
-  bottom:0;
+  position: absolute;
+  bottom: 0;
   width: 100%;
   background-color: #f2f2f2;
   text-align: left;
   padding: 10px 30px;
   margin-top: 100px;
 }
-
-
 
 //* ----- ClearFix ----- *//
 .group:before,
@@ -724,8 +745,6 @@ footer {
   }
 }
 
-
-
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500,800);
 
@@ -739,21 +758,20 @@ figure.snip1321 {
   perspective: 50em;
   border-bottom: 1px solid $light-background;
   padding-right: 150px;
-  margin-right: 20px;
+  margin-right: 50px;
 }
+
 figure.snip1321 * {
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
 
-figure.snip1321 figcaption {
+figcaption {
   position: absolute;
   top: 50%;
-  left: 250px;
-  right: 20px;
-  width: 250px;
+  right: 15px;
+  width: 300px;
   opacity: 0;
-  z-index: 100;
   background-color: #fff;
   padding: 15px;
   border-left: 1px solid $medium-grey;
@@ -770,6 +788,7 @@ figure.snip1321 figcaption {
 figure.snip1321 h2 {
   font-weight: 600;
 }
+
 figure.snip1321 h4 {
   font-weight: 400;
   text-transform: uppercase;
@@ -784,7 +803,10 @@ figure.snip1321:after {
   right: 0;
   display: flex;
   align-items: center;
-  color: #ddd;
+  color: $medium-grey;
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: capitalize;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   -webkit-transform: rotateX(-90deg);
@@ -803,6 +825,11 @@ figure.snip1321.hover figcaption {
   -webkit-transition-delay: 0.2s;
   transition-delay: 0.2s;
 }
+
+figure.snip1321:hover .project-name {
+  color: $primary;
+}
+
 figure.snip1321:hover:after,
 figure.snip1321.hover:after {
   -webkit-transform: rotateX(0);

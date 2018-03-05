@@ -46,28 +46,27 @@
     </div>
 
     <div class="group">
-      <form (ngSubmit)="updateView()" #calendarForm="ngForm" class="">
+      <form (ngSubmit)="updateView()" #calendarForm="ngForm" class="calendar-form">
 
-        <div class="group">
-          <div *ngFor="let day of emptyDays" class="date-box empty"></div>
+        <div *ngFor="let day of emptyDays" class="date-box empty"></div>
 
-          <div *ngFor="let day of daysInMonth" class="date-box">
-            <span class="month-day">{{ day }}</span>
-            <input
-              disabled="{{status}}"
-              type="number"
-              min="0"
-              id="{{day}}"
-              [(ngModel)]="incomingFormData[day - 1]"
-              name="{{day}}"
-              class="add-time-input"
-              [ngClass]="{'has-value': monthSchedule[day - 1].workTimeInMinutes !== 0}"
-              placeholder="{{(monthSchedule[day - 1].workTimeInMinutes)}} min"/>
-          </div>
-
+        <div *ngFor="let day of daysInMonth" class="date-box">
+          <span class="month-day">{{ day }}</span>
+          <input
+            disabled="{{status}}"
+            type="number"
+            min="0"
+            id="{{day}}"
+            [(ngModel)]="incomingFormData[day - 1]"
+            name="{{day}}"
+            class="add-time-input"
+            [ngClass]="{'has-value': monthSchedule[day - 1].workTimeInMinutes !== 0}"
+            placeholder="{{(monthSchedule[day - 1].workTimeInMinutes)}} min"/>
         </div>
 
-        <div *ngIf="project.status === 'active'" class="buttons-container center">
+        <div class="group"></div>
+
+        <div *ngIf="project.status === 'active'" class=" buttons-container center">
           <input type="submit" class="btn btn-primary btn-submit" value="Update Time">
         </div>
 

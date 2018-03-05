@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { AppRoutesModule } from './routes.module';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalModule} from 'ng2-modal';
 
 // Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -22,8 +23,6 @@ import { ClientModule } from './components/clients/client.module';
 
 // Pipes
 import { PipesModule } from './core/pipes/pipes.module';
-import { FloorPipe } from './core/pipes/floor-number.pipe';
-
 
 // Components
 import { AppComponent } from './app.component';
@@ -42,6 +41,7 @@ import { AuthGuard } from './core/guards/auth.guard';
     HttpClientModule,
     FormsModule,
     AppRoutesModule,
+    ModalModule,
     NgbModule.forRoot(),
     ToastModule.forRoot(),
     SharedModule,

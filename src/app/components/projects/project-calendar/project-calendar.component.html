@@ -3,28 +3,30 @@
 <div *ngIf="monthSchedule.length !== 0" class="calendar-container">
 
   <aside>
-    <h3>Current month details</h3>
-    <div class="current-month-summary">
-      <p class="current-month-time">Current month time:
-        <span class="value">{{currentMonthTime / 60 | floor}} hrs : {{currentMonthTime % 60}} min </span>
-      </p>
-      <p>Total minutes:
-        <span class="value"> ({{currentMonthTime}} min)</span>
-      </p>
-      <p class="current-month-price">Current month labour price:
-        <span class="value currency">{{currentMonthTime * project.rate / 60 | floor | number}}</span>
-      </p>
-      <p class="current-month-budget ">Current month budget:
-        <span class="value currency">{{project.budget / 12 | number}}</span>
-      </p>
-    </div>
+    <section class="summary-container">
+      <h3>Current month details</h3>
+      <ul>
+        <li class="summary-text">Current month time:
+          <span class="value">{{currentMonthTime / 60 | floor}} hrs : {{currentMonthTime % 60}} min </span>
+        </li>
+        <li class="summary-text">Total minutes:
+          <span class="value"> ({{currentMonthTime}} min)</span>
+        </li>
+        <li class="summary-text">Current month labour price:
+          <span class="value currency">{{currentMonthTime * project.rate / 60 | floor | number}}</span>
+        </li>
+        <li class="summary-text">Current month budget:
+          <span class="value currency">{{project.budget / 12 | number}}</span>
+        </li>
+        <li class="summary-text result">
+          Current month balance:
+          <span class="value currency"> {{(currentMonthTime * project.rate / 60) | floor | number}} </span>
+        </li>
+      </ul>
 
-    <div class="current-month-summary">
-      <p class="current-month-budget">Current month balance:
-        <span
-          class="value currency result"> {{1200 - (currentMonthTime * project.rate / 60) | floor | number}} </span>
-      </p>
-    </div>
+    </section>
+
+
     <div class="group"></div>
   </aside>
 
@@ -65,7 +67,7 @@
 
         </div>
 
-        <div *ngIf="project.status === 'active'" class="buttons-section">
+        <div *ngIf="project.status === 'active'" class="buttons-container center">
           <input type="submit" class="btn btn-primary btn-submit" value="Update Time">
         </div>
 

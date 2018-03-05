@@ -1,25 +1,29 @@
-<div class="">
-  <div class="">
-    <h3>Create new client</h3>
+
+  <div class="form-container">
+    <header>
+      <h3>Create new client</h3>
+    </header>
+
     <form (ngSubmit)="createClient()" #createClientForm="ngForm">
 
       <div class="form-group">
-        <label for="name">Client name</label>
+        <label for="client-name" hidden>Client name</label>
         <input type="text"
                class="form-control"
-               id="name"
+               id="client-name"
+               name="client-name"
+               placeholder="Enter client name"
                required
                [(ngModel)]="client.name"
-               name="name"
                #name="ngModel">
       </div>
 
-      <div class="right-container">
-        <input [disabled]="!createClientForm.form.valid" type="submit" class="btn btn-default right" value="Create"/>
-        <input type="button" class="btn btn-primary right" (click)="clearForm()" value="Clear"/>
+      <div class="buttons-container">
+        <button type="submit" [disabled]="!createClientForm.form.valid" class="btn btn-primary right">Create</button>
+        <button type="reset" class="btn btn-default right" (click)="clearForm()">Clear</button>
       </div>
 
     </form>
   </div>
-</div>
+
 

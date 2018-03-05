@@ -1,0 +1,818 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=cyrillic,cyrillic-ext,latin-ext');
+
+//@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+$primary: #0db273;
+$primary-darken: #0f824b;
+$positive: #00beff;
+
+$attention: rgb(255, 101, 69);
+$default-text: #000;
+$dark-grey: #646464;
+$medium-grey: #9c9c9c;
+$light-grey: #b4b4b4;
+$light-background: #f7f7f7;
+$danger: #bee854;
+$white: #fff;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  position:relative;
+  min-height: 100%;
+  font-family: 'Lato', sans-serif;
+  color: $default-text;
+  transition: .2s;
+  font-size: 14px;
+}
+body::after{ content:''; display:block; height:100px; } //To manage footer position
+
+a {
+  color: $medium-grey;
+}
+
+a, a:hover, a:active, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+h1, h2, h3, h4, h5, p {
+  margin: .5em 0;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+h5 {
+  font-size: 1.1em;
+}
+
+p {
+  font-size: 12px;
+}
+
+/* ----- Common ----- */
+hr {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 1px;
+  border: 0;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.center {
+  text-align: center;
+}
+
+//* ------ Containers ------ *//
+#content {
+  width: 90%;
+  margin: auto;
+  padding: 3em 3em 1em 3em;
+}
+
+.container {
+
+}
+
+.projects-list {
+  margin: 25px 0;
+}
+
+//*  -----  Buttons  -----  *//
+button {
+  border: none;
+  outline: none;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.btn {
+  margin: 3px;
+  padding: 5px 30px;
+  cursor: pointer !important;
+  transition: ease-in-out .3s;
+
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: 1;
+}
+
+.btn-primary {
+  background-color: $primary;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.btn-primary:hover {
+  background-color: $primary-darken;
+  animation-name: bounce !important;
+  -moz-animation-name: bounce !important;
+}
+
+.btn-default {
+  background-color: $light-background;
+  color: $medium-grey;
+}
+
+.btn-default:hover {
+  background-color: $dark-grey;
+  color: $white;
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: $dark-grey;
+  width: 20%;
+  text-align: left;
+  padding-left: 0;
+}
+
+.btn-danger .glyphicon {
+  color: #bee854;
+}
+
+.btn-danger:hover {
+  background-color: #bee854;
+  color: #4c4c4c;
+  padding-left: 25px;
+}
+
+.btn-danger:hover .glyphicon {
+  color: #84ac4a;
+  padding-right: 10px;
+}
+
+.btn-default-simple {
+  width: 20%;
+  text-align: left;
+  padding-left: 0;
+  background-color: transparent;
+  color: #6e6e6e;
+}
+
+.btn-default-simple .glyphicon {
+  color: #0db273;
+}
+
+.btn-default-simple:hover {
+  background-color: #0db273;
+  color: #fff;
+  padding-left: 25px;
+}
+
+.btn-default-simple:hover .glyphicon {
+  color: #0d9158;
+  padding-right: 10px;
+}
+
+.glyphicon {
+  margin-right: 5px;
+  transition: ease-in-out .3s;
+}
+
+//*  -----  Forms  -----  *//
+.form-container {
+  width: 35%;
+  margin: auto;
+}
+
+.form-container .form-header {
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-top: 10px;
+  color: $medium-grey;
+  transition: ease-in-out .2s;
+}
+
+.form-control {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: $primary;
+}
+
+.form-control::placeholder {
+  color: $danger;
+}
+
+.form-control:focus {
+  //background-color: rgba(180, 180, 180, 0.2);
+  color: $primary;
+  border-bottom: 1px solid $primary;
+  padding: 10px 20px;
+  transition: .2s;
+}
+
+option {
+  background-color: $white;
+  color: $medium-grey;
+  padding: 5px 0;
+}
+
+/*input[type=number]::-webkit-inner-spin-button,*/
+/*input[type=date]::-webkit-inner-spin-button,*/
+/*select::-webkit-inner-spin-button {*/
+/*!*-webkit-appearance: none;*!*/
+/*cursor:pointer;*/
+/*text-align:center;*/
+/*position:relative;*/
+/*width: 8px;*/
+/*height: 14px;*/
+/*padding: 5px;*/
+/*transition: ease-in-out .7s;*/
+/*}*/
+
+input[type=button],
+input[type=submit] {
+  outline: none;
+  padding: 10px 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+//* ------ Header ------ *//
+.main-navigation-container {
+  font-size: .9em;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.logo {
+  display: inline-block;
+  font-family: "Raleway SemiBold", sans-serif;
+  color: $primary;
+  font-size: 18px;
+  transition: ease-in-out .2s;
+}
+
+.logo:hover {
+  color: $primary-darken;
+}
+
+.welcome-user {
+  display: inline-block;
+  float: right;
+  margin-right: 25px;
+  color: $light-grey;
+}
+
+.welcome-user p {
+  margin: 0;
+}
+
+.main-nav {
+  float: right;
+  height: 100%;
+}
+
+.nav-item {
+  display: inline-block;
+  height: 100%;
+}
+
+.nav-item:hover {
+  background-color: $primary;
+  transition: ease-in-out .3s;
+  //border-bottom: 1px solid #ffffff;
+  color: #fff;
+}
+
+.nav-item:hover a {
+  color: #fff;
+  transition: ease-in-out .3s;
+}
+
+.nav-item.active {
+  //background-color: $dark-grey-color;
+  border-bottom: 1px solid $primary;
+  border-offset: 1px;
+}
+
+.nav-item.active:hover .nav-link {
+  color: $white;
+}
+
+.nav-item.active .nav-link {
+  //color: $primary;
+}
+
+.nav-link {
+  padding: 0 15px !important;
+  color: $light-grey;
+}
+
+
+
+//* ------ Project & Client List Styling ------ *//
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  //background-color: #f9f9f9;
+  //padding: 25px;
+}
+
+.buttons-container {
+  padding: 20px 0;
+}
+
+.project-box {
+  position: relative;
+  margin: 10px 20px;
+  padding: 13px;
+  //border-bottom: 1px solid $dark-grey;
+  color: $light-grey;
+  flex-basis: 250px;
+  flex-grow: 0;
+}
+
+//.project-box:first-child {
+//  margin-left: 0;
+//}
+//
+//.project-box:last-child {
+//  margin-right: 0;
+//}
+
+.project-box:after {
+  position: absolute;
+  transition: .3s;
+  content: '';
+  width: 0;
+  left: 50%;
+  bottom: 0;
+  height: 3px;
+  background-color: $dark-grey;
+  z-index: -1;
+}
+
+.project-box:hover:after {
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.project-box:hover {
+  //background-color: $dark-grey;
+  //transition: ease-in-out .2s;
+  //color: $white;
+}
+
+.project-box:hover .project-name {
+  color: $danger;
+  transition: ease-in-out .1s;
+}
+
+.project-box:hover .client {
+  color: $white;
+  transition: ease-in-out .1s;
+}
+
+.project-name {
+  //font-weight: 600;
+  color: $default-text;
+}
+
+.client {
+  color: $default-text;
+}
+
+.project-details-container{
+  margin-top: 15px;
+}
+
+.details {
+}
+
+.plus {
+  color: $positive;
+}
+
+.minus {
+  color: $danger;
+}
+
+.status {
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  line-height: 25px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+  color: #ddd;
+}
+
+.active {
+  //color: $secondary-color;
+}
+
+.closed {
+  //color: $dark-grey-color;
+}
+
+//* ------ Project Details Styling ------ *//
+.project-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.project-info {
+  order: 1;
+  width: calc(100% - 325px);
+  min-height: 150px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  margin-bottom: 30px;
+}
+
+// Current Month and Project Summary //
+.summary-container {
+  order: 2;
+  width: 300px;
+  padding: 25px;
+  //background-color: #f2f2f2;
+  margin-left: 25px;
+  color: $default-text;
+  border-left: 1px solid $light-background;
+}
+
+
+.summary-text {
+  padding: 10px 0 0 0;
+  font-size: .8em;
+}
+
+.currency::after {
+  content: ' лв.';
+  font-size: .8em;
+}
+
+.value {
+  float: right;
+}
+
+.result {
+  //font-size: 1.5em;
+  margin-top: 15px;
+  padding: 5px 15px;
+  color: #fff;
+  background-color: $default-text;
+}
+
+.due-date-badge {
+  font-size: .3em;
+  font-weight: 200;
+  background-color: $danger;
+  padding: 5px 15px;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 6px;
+  border-bottom-left-radius: 0;
+  position: relative;
+  top: -47px;
+  left: 20px;
+}
+
+.accent {
+  color: $positive;
+  font-weight: 200;
+}
+
+//* ------ Calendar Details Styling ------ *//
+.calendar-container {
+  display: flex;
+  margin: auto;
+  order: 3;
+}
+
+aside {
+  width: 300px;
+  order: 2;
+}
+
+main {
+  width: calc(100% - 325px);
+}
+
+
+// --- Months Display --- //
+.month-box {
+  width: 100%;
+  padding: 10px 10px;
+  margin-bottom: 1em;
+}
+
+.month-box p {
+  display: inline-block;
+  width: 250px;
+  padding: 0 1em;
+  text-align: center;
+  font-size: 1.5em;
+  color: #000;
+}
+
+.month-box .btn {
+  //font-size: 1.5em;
+  //padding: 0 10px;
+}
+
+// --- Month Table Formatting --- //
+.weekday {
+  display: inline-block;
+  width: 13.25%;;
+  height: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  /*background-color: #fafafa;*/
+  color: #000;
+  padding: 0 10px 0 10px;
+  margin: .5%;
+  font-size: .8em;
+}
+
+.date-box {
+  display: inline-block;
+  width: 13.25%;
+  height: 80px;
+  background-color: $light-background;
+  color: $primary;
+  padding: 15px 10px;
+  margin: .5%;
+  font-size: larger;
+  float: left;
+}
+
+.add-time-input {
+   margin-top: .7em;
+   width: 100%;
+   background-color: transparent;
+   padding: 5px 2px;
+   border: none;
+   color: #11a8bc;
+   font-size: .8em;
+   font-family: 'Titillium Web', sans-serif;
+   transition: ease-in-out .3s;
+ }
+
+.add-time-input:focus {
+  padding: 5px 7px;
+}
+
+.month-day {
+  margin-left: 3px;
+}
+
+input::placeholder {
+  color: #dddddd;
+}
+
+.add-time-input:focus {
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  outline: none
+}
+
+.empty {
+  background-color: transparent;
+}
+
+.has-value {
+  color: $attention;
+}
+
+.has-value::placeholder {
+  color: #4d6484;
+}
+
+.btn-submit {
+  width: 60%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+//* ------ Footer Styling ------ *//
+footer {
+  position:absolute;
+  bottom:0;
+  width: 100%;
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 10px 30px;
+  margin-top: 100px;
+}
+
+
+
+//* ----- ClearFix ----- *//
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+
+.group:after {
+  clear: both;
+}
+
+.group {
+  zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+//* ------ ANIMATIONS ------ *//
+//* ------ Spinner ------ *//
+.loader {
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid #32ad78;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------ End ------ */
+
+/*Animations*/
+
+@keyframes bounce {
+  0%, 100%, 20%, 50%, 80% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0)
+  }
+  40% {
+    -webkit-transform: translateY(-7px);
+    -ms-transform: translateY(-7px);
+    transform: translateY(-7px)
+  }
+  60% {
+    -webkit-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px)
+  }
+}
+
+
+
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,800);
+
+.project-box-2 {
+  flex-basis: 50%;
+}
+
+figure.snip1321 {
+  font-family: 'Raleway', Arial, sans-serif;
+  -webkit-perspective: 50em;
+  perspective: 50em;
+  border-bottom: 1px solid $light-background;
+  padding-right: 150px;
+  margin-right: 20px;
+}
+figure.snip1321 * {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+figure.snip1321 figcaption {
+  position: absolute;
+  top: 50%;
+  left: 250px;
+  right: 20px;
+  width: 250px;
+  opacity: 0;
+  z-index: 100;
+  background-color: #fff;
+  padding: 15px;
+  border-left: 1px solid $medium-grey;
+
+  //-webkit-transition: all 0.4s ease-in-out;
+  //transition: all 0.4s ease-in-out;
+  //-webkit-transform: rotateX(-90deg);
+  //transform: rotateX(-90deg);
+  //-webkit-transform-origin: 50% 50%;
+  //-ms-transform-origin: 50% 50%;
+  //transform-origin: 50% 50%;
+}
+
+figure.snip1321 h2 {
+  font-weight: 600;
+}
+figure.snip1321 h4 {
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+figure.snip1321:after {
+  //background-color: #ff6fd4;
+  position: relative;
+  content: "details";
+  top: -5px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  color: #ddd;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  opacity: 0;
+}
+
+figure.snip1321:hover figcaption,
+figure.snip1321.hover figcaption {
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  opacity: 1;
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+}
+figure.snip1321:hover:after,
+figure.snip1321.hover:after {
+  -webkit-transform: rotateX(0);
+  transform: rotateX(0);
+  opacity: 1;
+}
+
+.test {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 10;
+}

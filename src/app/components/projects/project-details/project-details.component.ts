@@ -2,28 +2,31 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
+
 // Confirm message
-import { ConfirmOptions, Position } from 'angular2-bootstrap-confirm';
-import { Positioning } from 'angular2-bootstrap-confirm/position';
+import {ConfirmOptions, Position} from 'angular2-bootstrap-confirm';
+import {Positioning} from 'angular2-bootstrap-confirm/position';
+// Or if you're already using the @ng-bootstrap/ng-bootstrap module
+// import {Positioning} from '@ng-bootstrap/ng-bootstrap/util/positioning';
+// or if you're using the ng2-bootstrap module
+// import {PositionService as Positioning} from 'ng2-bootstrap/components/position';
 
 // Models
 import { ProjectModel } from '../../../core/models/project.model';
-import { WorkDayModel } from '../../../core/models/work-day.model';
+
 
 // Services
 import { ProjectService } from '../../../core/services/project/project.service';
 import { AuthenticationService } from '../../../core/services/authentication/auth.service';
 import { ClientService } from '../../../core/services/client/client.service';
 
-import { PipesModule } from '../../../core/pipes/pipes.module';
+
 
 @Component({
   selector: 'app-project',
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.scss'],
-  providers: [ConfirmOptions,
-    // this is required so you can use the bundled position service rather than rely on the `@ng-bootstrap/ng-bootstrap` module
-    {provide: Position, useClass: Positioning}]
+  providers: [ ],
 })
 export class ProjectDetailsComponent implements OnInit {
   public project: ProjectModel;
@@ -92,6 +95,12 @@ export class ProjectDetailsComponent implements OnInit {
 
   editProject() {
     this.router.navigate(['project/edit/' + this.projectId]);
+  }
+
+  confirmDeletion() {
+    if (confirm('Are you sure to delete' + this.project.name + 'project?')) {
+      this.deleteProject();
+    }
   }
 
   deleteProject() {

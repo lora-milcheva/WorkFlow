@@ -1,17 +1,15 @@
-
-<nav>
-  <a class="" routerLink="/project/list">
-    <span class="logo">workflow</span>
-    <!--<img class="logo" src="../../../../assets/img/workflow_1.png"/>-->
-  </a>
+<nav class="main-navigation-container">
+  <div class="logo">
+      <a routerLink="/project/list">workflow</a>
+  </div>
 
 
-  <ul class="navigation">
-    <span *ngIf="user" class="username">logged in as: {{ user }}</span>
-    <li *ngIf="authService.isLoggedIn()" class="nav-item"  routerLinkActive="active" >
+  <ul class="main-nav">
+    <li *ngIf="authService.isLoggedIn()" class="nav-item" routerLinkActive="active">
       <a routerLink="/project/list" class="nav-link">My Dashboard</a>
     </li>
-    <li *ngIf="authService.isLoggedIn()" class="nav-item"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+    <li *ngIf="authService.isLoggedIn()" class="nav-item" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
       <a routerLink="/project/create" class="nav-link">Create Project</a>
     </li>
     <li *ngIf="!authService.isLoggedIn()" class="nav-item" routerLinkActive="active">
@@ -21,8 +19,11 @@
       <a routerLink="/register" class="nav-link">Register</a>
     </li>
     <li *ngIf="authService.isLoggedIn()" class="nav-item" routerLinkActive="active">
-      <a routerLink="/logout" class="nav-link" >Logout</a>
+      <a routerLink="/logout" class="nav-link">Logout</a>
     </li>
   </ul>
 
+  <div *ngIf="user" class="welcome-user">
+    <p>Welcome, {{user}}.</p>
+  </div>
 </nav>

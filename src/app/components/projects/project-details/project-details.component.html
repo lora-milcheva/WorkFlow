@@ -1,5 +1,4 @@
-<div *ngIf="project" class="project-container">
-
+<section *ngIf="project" class="project-container">
   <section class="project-info">
     <header class="project-name">
       <h1>{{ project.name }} <span class="due-date-badge ">Due date: {{ project.endDate }}</span></h1>
@@ -7,7 +6,7 @@
       </a>
     </header>
 
-    <div *ngIf="project.status === 'active'" class="buttons-section ">
+    <div *ngIf="project.status === 'active'" class="buttons-container ">
       <button class="btn btn-default-simple" (click)="editProject()">
         <span class="glyphicon glyphicon-pencil"></span>
         Edit Project
@@ -16,41 +15,38 @@
         <span class="glyphicon glyphicon-remove"></span>
         Close Project
       </button>
-      <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteProject()">
+      <button *ngIf="isAdmin" class="btn btn-danger" (click)="confirmDeletion()">
         <span class="glyphicon glyphicon-trash"></span>
         Delete Project
       </button>
       <a routerLink="/project/list" class="btn btn-default">Back to Projects</a>
     </div>
 
-    <div *ngIf="project.status === 'closed'" class="buttons-section">
+    <div *ngIf="project.status === 'closed'" class="buttons-container">
       <p>Project closed</p>
     </div>
 
   </section>
 
-  <section class="summary-box">
-    <h3>Project Info</h3>
-    <div class="current-month-summary">
-      <p class="current-month-time">Budget:
+  <section class="summary-container">
+    <h3>Project Details</h3>
+    <ul>
+      <li class="summary-text">Budget:
         <span class="value currency">{{ project.budget | number }}</span>
-      </p>
-      <p>Total time:
+      </li>
+      <li class="summary-text">Total time:
         <span class="value"> {{ hours }} hrs : {{ minutes }}min</span>
-      </p>
-    </div>
+      </li>
+    </ul>
 
-    <div class="current-month-summary">
-      <p class="current-month-budget">Balance:
-        <span class="value currency result"> {{ balance | floor | number }} </span>
-      </p>
-    </div>
-    <div class="group"></div>
+    <p class="summary-text result">Balance:
+      <span class="value currency"> {{ balance | floor | number }} </span>
+    </p>
   </section>
 
 
-  <section class="calendar-box">
+  <section class="calendar-container">
     <app-calendar [project]="project"></app-calendar>
   </section>
 
-</div>
+</section>

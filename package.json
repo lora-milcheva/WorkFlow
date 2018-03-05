@@ -25,6 +25,7 @@
     "angular2-bootstrap-confirm": "^1.0.4",
     "angular2-toaster": "^4.0.1",
     "core-js": "^2.4.1",
+    "ng2-modal": "0.0.25",
     "ng2-toastr": "^4.1.2",
     "ngx-bootstrap": "^2.0.0-beta.11",
     "primeng": "^5.0.2",

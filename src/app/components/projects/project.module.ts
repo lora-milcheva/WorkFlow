@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ModalModule} from 'ng2-modal';
+
 
 // Components
 import { projectComponents } from './index';
@@ -24,7 +26,8 @@ import { PipesModule } from '../../core/pipes/pipes.module';
     FormsModule,
     HttpClientModule,
     RouterModule,
-    PipesModule
+    PipesModule,
+    ModalModule
   ],
   exports: [
     ...projectComponents

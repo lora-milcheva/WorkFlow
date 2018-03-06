@@ -1,8 +1,9 @@
 <section *ngIf="project" class="project-container">
-  <section class="project-info">
+  <section class="project-info-container">
     <header class="project-name">
-      <h1>{{ project.name }} <span class="due-date-badge ">Due date: {{ project.endDate }}</span></h1>
-      <a routerLink="/client/details/{{project.clientId}}"><h5>{{ project.client }}</h5>
+      <h1>{{ project.name }} </h1>
+      <span class="due-date-badge ">Due date: {{ project.endDate }}</span>
+      <a routerLink="/client/details/{{project.clientId}}"><p class="client"><span class="glyphicon glyphicon-user"></span> {{ project.client }}</p>
       </a>
     </header>
 
@@ -39,7 +40,7 @@
       </li>
     </ul>
 
-    <p class="summary-text result">Balance:
+    <p class="summary-text result group">Balance:
       <span class="value currency"> {{ balance | floor | number }} </span>
     </p>
   </section>

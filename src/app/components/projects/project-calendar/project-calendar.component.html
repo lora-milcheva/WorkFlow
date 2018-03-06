@@ -18,7 +18,7 @@
         <li class="summary-text">Current month budget:
           <span class="value currency">{{project.budget / 12 | number}}</span>
         </li>
-        <li class="summary-text result">
+        <li class="summary-text result group">
           Current month balance:
           <span class="value currency"> {{(currentMonthTime * project.rate / 60) | floor | number}} </span>
         </li>
@@ -33,9 +33,9 @@
   <main>
 
     <div class="month-box">
-      <button (click)="loadPreviousMonth()" class="btn btn-primary">&lsaquo;</button>
+      <button (click)="loadPreviousMonth()" class="btn btn-default">&lsaquo;</button>
       <p> {{ monthAsString }} {{ year }} </p>
-      <button (click)="loadNextMonth()" class="btn btn-primary">&rsaquo;</button>
+      <button (click)="loadNextMonth()" class="btn btn-default">&rsaquo;</button>
     </div>
 
 

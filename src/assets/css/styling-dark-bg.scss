@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=cyrillic,cyrillic-ext,latin-ext');
 //@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
-
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 
 $primary: #0db273;
@@ -8,11 +7,13 @@ $primary-darken: #0f824b;
 $positive: #00beff;
 
 $attention: rgb(255, 101, 69);
-$default-text: #000;
+$default-text: #fff;
 $dark-grey: #646464;
 $medium-grey: #9c9c9c;
 $light-grey: #b4b4b4;
-$light-background: #f7f7f7;
+$dark-violet: #571047;
+$dark-violet-footer: #210018;
+$dark-violet-figurecaption: #561047;
 $danger: #bee854;
 $white: #fff;
 
@@ -33,7 +34,7 @@ body {
   font-size: 14px;
   background-color: #efefef;
   background: url("../../assets/img/img-noise-361x370 (2).png");
-  //background: linear-gradient(to bottom, rgba(255,99,203,1) 0%, rgba(61,1,48,1) 0%);
+  background: linear-gradient(to bottom, rgba(255, 99, 203, 1) 0%, rgba(61, 1, 48, 1) 0%);
 }
 
 body::after {
@@ -62,7 +63,7 @@ h1 {
   line-height: 1em;
   font-weight: 600;
   text-transform: uppercase;
-  color: #fff;
+  color: $danger;
 }
 
 h2 {
@@ -73,6 +74,7 @@ h3 {
   font-size: 2.5em;
   text-transform: uppercase;
   line-height: .9em;
+  color: rgba(255, 255, 255, .2);
 }
 
 h4 {
@@ -126,7 +128,7 @@ hr {
 button {
   border: none;
   outline: none;
-  font-family: 'Titillium Web', sans-serif;
+  //font-family: 'Titillium Web', sans-serif;
 }
 
 .btn {
@@ -158,13 +160,13 @@ button {
 }
 
 .btn-default {
-  background-color: $light-background;
+  background-color: $dark-violet;
   color: $medium-grey;
 }
 
 .btn-default:hover {
   background-color: $default-text;
-  color: $white;
+  color: $dark-violet;
 }
 
 .btn-danger {
@@ -195,7 +197,7 @@ button {
   text-align: left;
   padding-left: 0;
   background-color: transparent;
-  color: #6e6e6e;
+  color: $medium-grey;
 }
 
 .btn-default-simple .glyphicon {
@@ -215,7 +217,7 @@ button {
 
 .glyphicon {
   margin-right: 5px;
-  transition: ease-in-out .3s;
+  transition: ease-in-out .2s;
 }
 
 //*  -----  Forms  -----  *//
@@ -252,8 +254,8 @@ button {
   outline: none;
   padding: 10px;
   margin-top: 8px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  color: #0db273;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: $primary;
   background-color: transparent;
   position: absolute;
   right: 0;
@@ -301,16 +303,13 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
-
 //* ------ Header ------ *//
 .main-navigation-container {
   font-size: .9em;
   height: 40px;
   line-height: 40px;
   padding: 0 20px;
-  border-bottom: 1px solid #f2f2f2;
-  background-color: #fff;
+  background-color: $dark-violet;
 }
 
 .logo {
@@ -322,7 +321,7 @@ input[type=submit] {
 }
 
 .logo:hover {
-  color: $primary-darken;
+  color: $white;
 }
 
 .welcome-user {
@@ -448,7 +447,17 @@ input[type=submit] {
 }
 
 .client {
-  color: $default-text;
+  color: $medium-grey;
+  font-size: 1.2em;
+  padding-left: 5px;
+}
+
+.client .glyphicon {
+  font-size: .7em;
+}
+
+.client:hover {
+  color: $primary;
 }
 
 .project-details-container {
@@ -500,7 +509,7 @@ input[type=submit] {
   order: 1;
   width: calc(100% - 325px);
   min-height: 150px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 30px;
   position: relative;
 }
@@ -512,7 +521,7 @@ input[type=submit] {
 .project-info-container .project-name h1 {
   color: $default-text;
   font-size: 3em;
-  font-weight: 400;
+  font-weight: 200;
   text-transform: capitalize;
 }
 
@@ -522,7 +531,7 @@ input[type=submit] {
   background-color: $danger;
   padding: 5px 15px;
   text-transform: uppercase;
-  color: $default-text;
+  color: $dark-violet;
   border-radius: 6px;
   border-bottom-left-radius: 0;
   position: absolute;
@@ -537,8 +546,8 @@ input[type=submit] {
   padding: 25px;
   //background-color: #f2f2f2;
   margin-left: 25px;
-  color: $default-text;
-  border-left: 1px solid $light-background;
+  color: $light-grey;
+  border-left: 1px solid rgba(255, 255, 255, .05);
 }
 
 .summary-text {
@@ -556,11 +565,11 @@ input[type=submit] {
 }
 
 .result {
-  //font-size: 1.5em;
+  font-size: 1.3em;
   margin-top: 15px;
   padding: 5px 15px;
   color: #fff;
-  background-color: $default-text;
+  background-color: $dark-violet;
 }
 
 .accent {
@@ -599,8 +608,8 @@ main {
 }
 
 .month-box .btn {
-  font-size: 1.2em;
-  //padding: 0 10px;
+  font-size: 1.5em;
+  padding: 0 10px;
 }
 
 // --- Month Table Formatting --- //
@@ -608,9 +617,9 @@ main {
   display: inline-block;
   width: 13.25%;;
   height: 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  color: $medium-grey;
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
   /*background-color: #fafafa;*/
-  color: #000;
   padding: 0 10px 0 10px;
   margin: .5%;
   font-size: .8em;
@@ -623,7 +632,7 @@ main {
   background-color: #f5fff3;
   background-color: #f8f8f8;
   background-color: #f7f6f399;
-  background-color: #fff;
+  background-color: #440c38;
   color: $primary;
   padding: 12px 10px;
   margin: .5%;
@@ -641,10 +650,7 @@ main {
 .date-box:nth-child(28):not(.empty),
 .date-box:nth-child(34):not(.empty),
 .date-box:nth-child(35):not(.empty) {
-  background-color: #e9ffdb;
-  background-color: #fff2db;
-  background-color: #f7f6f3;
-  background-color: #f8f8f8;
+  background-color: #400834;
 }
 
 .add-time-input {
@@ -653,7 +659,7 @@ main {
   background-color: transparent;
   padding: 5px 2px;
   border: none;
-  color: #11a8bc;
+  color: $danger;
   font-size: .8em;
   //font-family: 'Titillium Web', sans-serif;
   transition: ease-in-out .3s;
@@ -668,12 +674,12 @@ main {
 }
 
 .add-time-input::placeholder {
-  color: #d8d9ca;
+  color: #a4a4a4;
 }
 
 .add-time-input:focus {
-  background-color: #ffffff;
-  border: 1px solid #eaeaea;
+  background-color: rgba(33, 0, 24, .3);
+  border: 1px solid rgba(33, 0, 24, .8);;
   outline: none
 }
 
@@ -682,11 +688,11 @@ main {
 }
 
 .has-value {
-  color: $attention;
+  color: $danger;
 }
 
 .has-value::placeholder {
-  color: #4d6484;
+  color: $attention;
 }
 
 .btn-submit {
@@ -705,7 +711,7 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: #f2f2f2;
+  background-color: $dark-violet-footer;
   text-align: left;
   padding: 10px 30px;
   margin-top: 100px;
@@ -793,7 +799,7 @@ figure.snip1321 {
   font-family: 'Raleway', Arial, sans-serif;
   -webkit-perspective: 50em;
   perspective: 50em;
-  border-bottom: 1px solid $light-background;
+  border-bottom: 1px solid $dark-violet;
   padding: 5px;
   margin-right: 50px;
 }
@@ -809,9 +815,9 @@ figcaption {
   right: 15px;
   width: 250px;
   opacity: 0;
-  background-color: #fff;
+  background-color: $dark-violet-figurecaption;
   padding: 15px;
-  border-left: 1px solid $medium-grey;
+  //border-left: 1px solid $medium-grey;
   color: $medium-grey;
 
   //-webkit-transition: all 0.4s ease-in-out;
@@ -832,24 +838,19 @@ figure.snip1321 h4 {
   text-transform: uppercase;
 }
 
-.project-bullet {
-  font-size: .6em;
-  padding-right: 15px;
-}
-
 .project-info-arrow {
   display: inline-block;
   position: absolute;
   right: 270px;
   top: 50%;
   font-size: .8em;
-  color: $default-text;
+  color: $danger;
   opacity: 0;
 
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
-  -webkit-transform: rotateX(0deg);
-  transform: rotateX(0deg);
+  -webkit-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
   -webkit-transform-origin: 50% 50%;
   -ms-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
@@ -864,15 +865,6 @@ figure.snip1321:hover .project-info-arrow {
   transition-delay: 0.2s;
 }
 
-figure.snip1321:hover .project-bullet {
-  opacity: 0;
-
-  -webkit-transform: translateY(-50%);
-  transform: translate(100%);
-  -webkit-transition-delay: 0.2s;
-  transition-delay: 0.2s;
-}
-
 figure.snip1321:after {
   //background-color: #ff6fd4;
   position: relative;
@@ -882,12 +874,10 @@ figure.snip1321:after {
   right: 0;
   display: flex;
   align-items: center;
-  padding-left: 32px;
   color: $medium-grey;
   font-size: 8px;
   letter-spacing: 1px;
   text-transform: capitalize;
-
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   -webkit-transform: rotateX(-90deg);

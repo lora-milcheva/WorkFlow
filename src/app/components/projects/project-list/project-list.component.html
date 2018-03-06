@@ -13,7 +13,7 @@
 
 <div *ngIf="projects.length === 0" class="loader"></div>
 <div *ngIf="projects.length !== 0">
-  <section class="projects-list">
+  <section class="projects-list-container">
     <header>
       <h3 class="">Active projects</h3>
       <hr/>
@@ -23,7 +23,10 @@
       <article *ngFor="let project of activeProjects" class="project-box-2">
         <a routerLink="/project/details/{{project._id}}">
           <figure class="snip1321">
-            <h4 class="project-name">{{project.name}}</h4>
+
+            <span class="glyphicon glyphicon-play project-info-arrow"></span>
+            <h4 class="project-name"><span class="glyphicon glyphicon-play project-bullet"></span>{{project.name}}</h4>
+
             <figcaption>
               <header>
                 <span class="status active">A</span>
@@ -54,7 +57,7 @@
     </section>
   </section>
 
-  <section class="projects-list">
+  <section class="projects-list-container">
     <header>
       <h3 class="">Closed projects</h3>
       <hr/>

@@ -7,7 +7,7 @@ $primary-darken: #0f824b;
 $positive: #00beff;
 
 $attention: rgb(255, 101, 69);
-$default-text: #fff;
+$default-text: #cccccc;
 $dark-grey: #646464;
 $medium-grey: #9c9c9c;
 $light-grey: #b4b4b4;
@@ -865,6 +865,21 @@ figure.snip1321:hover .project-info-arrow {
   transition-delay: 0.2s;
 }
 
+.project-bullet {
+  font-size: .6em;
+  padding-right: 15px;
+  color: $dark-grey;
+}
+
+figure.snip1321:hover .project-bullet {
+  opacity: 0;
+
+  -webkit-transform: translateY(-50%);
+  transform: translate(100%);
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+}
+
 figure.snip1321:after {
   //background-color: #ff6fd4;
   position: relative;
@@ -874,10 +889,12 @@ figure.snip1321:after {
   right: 0;
   display: flex;
   align-items: center;
+  padding-left: 32px;
   color: $medium-grey;
   font-size: 8px;
   letter-spacing: 1px;
   text-transform: capitalize;
+
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   -webkit-transform: rotateX(-90deg);

@@ -33,7 +33,6 @@ body {
   transition: .2s;
   font-size: 14px;
   background-color: #efefef;
-  background: url("../../assets/img/img-noise-361x370 (2).png");
   background: linear-gradient(to bottom, rgba(255, 99, 203, 1) 0%, rgba(61, 1, 48, 1) 0%);
 }
 
@@ -116,7 +115,9 @@ hr {
 }
 
 .container {
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .projects-list-container {
@@ -171,18 +172,19 @@ button {
 
 .btn-danger {
   background-color: transparent;
-  color: $dark-grey;
+  color: $medium-grey;
   width: 20%;
+  min-width: 180px;
   text-align: left;
   padding-left: 0;
 }
 
 .btn-danger .glyphicon {
-  color: #bee854;
+  color: $danger;
 }
 
 .btn-danger:hover {
-  background-color: #bee854;
+  background-color: $danger;
   color: #4c4c4c;
   padding-left: 25px;
 }
@@ -194,6 +196,7 @@ button {
 
 .btn-default-simple {
   width: 20%;
+  min-width: 180px;
   text-align: left;
   padding-left: 0;
   background-color: transparent;
@@ -230,13 +233,13 @@ button {
 }
 
 .form-header {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .headline-accent-line {
   background: none;
   color: #fff;
-  border-bottom: 6px solid #fff;
+  border-bottom: 6px solid $medium-grey;
   width: 60px;
   margin-left: 3px;
 }
@@ -246,6 +249,10 @@ button {
   color: $default-text;
   transition: ease-in-out .2s;
   position: relative;
+}
+
+.form-group label {
+  color: rgba(255, 255, 255, .2)
 }
 
 .form-control {
@@ -302,6 +309,22 @@ input[type=submit] {
   font-size: 16px;
   cursor: pointer;
 }
+
+
+//Search
+.search-container {
+  text-align: right;
+  flex-grow: 1;
+}
+
+.search-container .form-group {
+  width: 100%;
+}
+
+.search-container .form-control {
+  position: static;
+}
+
 
 //* ------ Header ------ *//
 .main-navigation-container {
@@ -360,7 +383,6 @@ input[type=submit] {
 .nav-item.active {
   //background-color: $dark-grey-color;
   border-bottom: 1px solid $primary;
-  border-offset: 1px;
 }
 
 .nav-item.active:hover .nav-link {
@@ -387,6 +409,7 @@ input[type=submit] {
 
 .buttons-container {
   padding: 20px 0;
+  flex-grow: 1;
 }
 
 .project-box {
@@ -446,18 +469,9 @@ input[type=submit] {
   color: $default-text;
 }
 
-.client {
-  color: $medium-grey;
-  font-size: 1.2em;
-  padding-left: 5px;
-}
-
-.client .glyphicon {
-  font-size: .7em;
-}
-
-.client:hover {
-  color: $primary;
+.project-box:hover .client,
+.project-box-2:hover .client {
+ color: $white;
 }
 
 .project-details-container {
@@ -469,16 +483,16 @@ input[type=submit] {
 
 .plus {
   display: inline-block;
-  padding: 5px;
+  padding: 5px 10px;
   background-color: $positive;
   color: $white;
 }
 
 .minus {
   display: inline-block;
-  padding: 5px;
+  padding: 5px 10px;
   background-color: $danger;
-  color: $white;
+  color: $dark-violet;
 }
 
 .status {
@@ -525,6 +539,18 @@ input[type=submit] {
   text-transform: capitalize;
 }
 
+.project-info-container .client {
+  padding-left: 5px;
+}
+
+.project-info-container .client .glyphicon {
+  font-size: 1em;
+}
+
+.project-info-container .client:hover {
+  color: $primary;
+}
+
 .due-date-badge {
   font-size: .8em;
   font-weight: 200;
@@ -565,9 +591,9 @@ input[type=submit] {
 }
 
 .result {
-  font-size: 1.3em;
+  font-size: .9em;
   margin-top: 15px;
-  padding: 5px 15px;
+  padding: 10px 15px;
   color: #fff;
   background-color: $dark-violet;
 }

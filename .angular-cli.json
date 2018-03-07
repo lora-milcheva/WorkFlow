@@ -22,7 +22,7 @@
         "styles.css",
         "../node_modules/ng2-toastr/ng2-toastr.css",
         "assets/css/reset.css",
-        "assets/css/styling-dark-bg.scss",
+        "assets/css/styling.scss",
         "assets/glyphicons/glyphicons.css"
       ],
       "scripts": [],

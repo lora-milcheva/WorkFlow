@@ -1,12 +1,18 @@
 <header class="group">
   <h1>My dashboard</h1>
 
-  <div class="buttons-container">
-    <a routerLink="/project/create" class="btn btn-default">New Project</a>
-    <a routerLink="/client/create" class="btn btn-default">New Client</a>
-    <div class="right">
-      <input class="">
-      <button>Search</button>
+  <div class="container">
+    <div class="buttons-container">
+      <a routerLink="/project/create" class="btn btn-default">New Project</a>
+      <a routerLink="/client/create" class="btn btn-default">New Client</a>
+    </div>
+    <div class="search-container">
+      <form method="get" >
+        <div class="form-group right">
+          <input type="text" id="search" name="search" class="form-control">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
     </div>
   </div>
 </header>
@@ -36,17 +42,17 @@
               <div class="project-details-container">
                 <p class="details">
                   Budget:
-                  <span class="value currency"> {{project.budget}} </span>
+                  <span class="value currency"> {{project.budget | floor | number  }} </span>
                 </p>
                 <p>
                   <span class="details">Cost:</span>
-                  <span class="value currency"> {{ project.totalTime * project.rate / 60 | number }}</span>
+                  <span class="value currency"> {{ project.totalTime * project.rate / 60 | floor | number }}</span>
                 </p>
                 <p>
                   <span class="details">Balance:</span>
                   <span class="value plus currency"
                         [ngClass]="{'minus': project.budget - ( project.totalTime * project.rate / 60 ) <= 0}">
-            {{project.budget - ( project.totalTime * project.rate / 60 ) | number }}
+            {{project.budget - ( project.totalTime * project.rate / 60 ) | floor | number }}
           </span>
                 </p>
               </div>
@@ -63,29 +69,38 @@
       <hr/>
     </header>
     <section class="projects-container">
-      <div *ngFor="let project of closedProjects" class="project-box">
+      <div *ngFor="let project of closedProjects" class="project-box-2">
         <a routerLink="/project/details/{{project._id}}">
-          <header>
-            <span class="status active">A</span>
-            <h4 class="project-name">{{project.name}}</h4>
-            <p class="client">{{project.client}}</p>
-          </header>
+          <figure class="snip1321">
 
-          <p class="details">
-            Budget:
-            <span class="value right"> {{project.budget}} </span>
-          </p>
-          <p>
-            <span class="details">Cost:</span>
-            <span class="value right"> {{ project.totalTime * project.rate / 60 | number }}</span>
-          </p>
-          <p>
-            <span class="details">Balance:</span>
-            <span class="value right plus"
-                  [ngClass]="{'minus': project.budget - ( project.totalTime * project.rate / 60 ) <= 0}">
-            {{project.budget - ( project.totalTime * project.rate / 60 ) | number }}
+            <span class="glyphicon glyphicon-play project-info-arrow"></span>
+            <h4 class="project-name"><span class="glyphicon glyphicon-play project-bullet"></span>{{project.name}}</h4>
+
+            <figcaption>
+              <header>
+                <span class="status active">A</span>
+                <h4 class="project-name">{{project.name}}</h4>
+                <p class="client">{{project.client}}</p>
+              </header>
+              <div class="project-details-container">
+                <p class="details">
+                  Budget:
+                  <span class="value currency"> {{project.budget | floor | number }} </span>
+                </p>
+                <p>
+                  <span class="details">Cost:</span>
+                  <span class="value currency"> {{ project.totalTime * project.rate / 60 | floor | number  }}</span>
+                </p>
+                <p>
+                  <span class="details">Balance:</span>
+                  <span class="value plus currency"
+                        [ngClass]="{'minus': project.budget - ( project.totalTime * project.rate / 60 ) <= 0}">
+            {{project.budget - ( project.totalTime * project.rate / 60 ) | floor | number }}
           </span>
-          </p>
+                </p>
+              </div>
+            </figcaption>
+          </figure>
         </a>
       </div>
     </section>

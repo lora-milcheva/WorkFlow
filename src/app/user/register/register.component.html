@@ -1,7 +1,11 @@
-{{model | json}}
-<div class="container">
-  <h1>Register Form</h1>
-  <form (ngSubmit)="register()" #registerForm="ngForm" class="form-container">
+<div class="form-container">
+
+  <header class="form-header">
+    <h1>Register</h1>
+    <hr class="headline-accent-line"/>
+  </header>
+
+  <form (ngSubmit)="register()" #registerForm="ngForm">
 
     <div class="form-group">
       <label for="username">Username</label>
@@ -51,7 +55,9 @@
       </div>
     </div>
 
-    <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-success">Submit</button>
+    <div class="buttons-container">
+      <button [disabled]="!registerForm.form.valid" type="submit" class="btn btn-success right">Register</button>
+    </div>
 
   </form>
 

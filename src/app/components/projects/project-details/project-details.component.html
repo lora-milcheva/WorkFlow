@@ -23,12 +23,16 @@
           Delete Project
         </button>
       </div>
-      <div>
-        <a routerLink="/project/list" class="btn btn-default">Back to Projects</a>
+
+      <div *ngIf="project.status === 'closed'" class="buttons-container">
+        <button *ngIf="isAdmin" class="btn btn-danger" (click)="confirm('delete')">
+          <span class="glyphicon glyphicon-trash"></span>
+          Delete Project
+        </button>
       </div>
 
-      <div *ngIf="project.status === 'closed'" class="">
-        <p>Project closed</p>
+      <div>
+        <a routerLink="/project/list" class="btn btn-default">Back to Projects</a>
       </div>
     </div>
 

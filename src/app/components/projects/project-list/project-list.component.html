@@ -17,8 +17,9 @@
   </div>
 </header>
 
-<div *ngIf="projects.length === 0" class="loader"></div>
-<div *ngIf="projects.length !== 0">
+<div *ngIf="!loaded" class="loader"></div>
+<p *ngIf="loaded">{{message}}</p>
+<div *ngIf="loaded">
   <section class="projects-list-container">
     <header>
       <h3 class="">Active projects</h3>

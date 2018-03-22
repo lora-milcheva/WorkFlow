@@ -1,5 +1,10 @@
-<div class="container">
-  <h1>Login Form</h1>
+<div class="form-container">
+
+  <header class="form-header">
+    <h1>Login</h1>
+    <hr class="headline-accent-line"/>
+  </header>
+
   <form (ngSubmit)="login()" #loginForm="ngForm">
     <div class="form-group">
       <label for="username">Username</label>
@@ -25,7 +30,9 @@
       </div>
     </div>
 
-    <button [disabled]="!loginForm.form.valid" type="submit" class="btn btn-success">Submit</button>
+    <div class="buttons-container">
+      <button [disabled]="!loginForm.form.valid" type="submit" class="btn btn-success right">Login</button>
+    </div>
   </form>
   <div *ngIf="loginFail" class="alert alert-danger">
     Failed Login!

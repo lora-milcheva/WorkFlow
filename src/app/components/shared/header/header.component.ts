@@ -25,4 +25,8 @@ export class HeaderComponent implements OnInit {
   getUser() {
     this.user = localStorage.getItem('username');
   }
+
+  isLoggedUser() {
+    return this.authService.isLoggedIn();
+  }
 }

@@ -26,12 +26,17 @@ export class ProjectListComponent implements OnInit {
 
   private user: any;
   private isAdmin: boolean;
+  private loaded: boolean;
+  private message: string;
 
   constructor(private projectService: ProjectService,
               private authService: AuthenticationService) {
     this.projects = [];
     this.activeProjects = [];
     this.closedProjects = [];
+
+    this.loaded = false;
+    this.message = 'projects loading...';
   }
 
   ngOnInit() {
@@ -52,8 +57,14 @@ export class ProjectListComponent implements OnInit {
     this.projectService
       .loadCurrentUserProjects()
       .subscribe(projectsReceived => {
+        console.log(projectsReceived.length);
+        if (projectsReceived.length === 0) {
+          this.message = 'No projects found';
+        }
         this.projects = projectsReceived;
         this.filterProjects();
+        this.loaded = true;
+        this.message = '';
       });
   }
 
@@ -61,8 +72,13 @@ export class ProjectListComponent implements OnInit {
     this.projectService
       .loadAllProjects()
       .subscribe(projectsReceived => {
+        if (projectsReceived.length === 0) {
+          this.message = 'No projects found';
+        }
         this.projects = projectsReceived;
         this.filterProjects();
+        this.loaded = true;
+        this.message = '';
       });
   }
 

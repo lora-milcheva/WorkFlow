@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=cyrillic,cyrillic-ext,latin-ext');
 //@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
-
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 
 $primary: #0db273;
@@ -133,7 +132,7 @@ button {
 .btn {
   margin: 3px;
   padding: 5px 30px;
-  cursor: pointer !important;
+  cursor: pointer;
   transition: ease-in-out .3s;
 
   -webkit-animation-duration: 1s;
@@ -144,6 +143,13 @@ button {
   animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
   -webkit-animation-iteration-count: 1;
+}
+
+.btn:disabled,
+.btn:disabled:hover {
+  background-color: $light-background;
+  color: $medium-grey;
+  opacity: .6;
 }
 
 .btn-primary {
@@ -304,7 +310,6 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
 //Search
 .search-container {
   text-align: right;
@@ -318,8 +323,6 @@ input[type=submit] {
 .search-container .form-control {
   position: static;
 }
-
-
 
 //* ------ Header ------ *//
 .main-navigation-container {
@@ -545,7 +548,6 @@ input[type=submit] {
 .project-info-container .client:hover {
   color: $primary;
 }
-
 
 .due-date-badge {
   font-size: .8em;
@@ -840,10 +842,10 @@ figcaption {
   right: 15px;
   width: 250px;
   opacity: 0;
-  background-color: #fff;
+  background-color: $primary;
   padding: 15px;
   border-left: 1px solid $medium-grey;
-  color: $medium-grey;
+  color: $light-background;
 
   //-webkit-transition: all 0.4s ease-in-out;
   //transition: all 0.4s ease-in-out;
@@ -866,6 +868,7 @@ figure.snip1321 h4 {
 .project-bullet {
   font-size: .6em;
   padding-right: 15px;
+  top: -3px;
 }
 
 .project-info-arrow {
@@ -938,8 +941,12 @@ figure.snip1321.hover figcaption {
   transition-delay: 0.2s;
 }
 
-figure.snip1321:hover .project-name {
+figure.snip1321:hover > .project-name {
   color: $primary;
+}
+
+figure.snip1321:hover figcaption .project-name {
+  color: $white;
 }
 
 figure.snip1321:hover:after,

@@ -7,6 +7,7 @@ $primary-darken: #0f824b;
 $positive: #00beff;
 
 $attention: rgb(255, 101, 69);
+$warm-red: #FE3F3E;
 $default-text: #cccccc;
 $dark-grey: #646464;
 $medium-grey: #9c9c9c;
@@ -135,7 +136,7 @@ button {
 .btn {
   margin: 3px;
   padding: 5px 30px;
-  cursor: pointer !important;
+  cursor: pointer;
   transition: ease-in-out .3s;
 
   -webkit-animation-duration: 1s;
@@ -148,6 +149,15 @@ button {
   -webkit-animation-iteration-count: 1;
 }
 
+
+.btn:disabled,
+.btn:disabled:hover {
+  background-color: $dark-violet;
+  color: $medium-grey;
+  opacity: .35;
+}
+
+
 .btn-primary {
   background-color: $primary;
   color: #ffffff;
@@ -156,8 +166,8 @@ button {
 
 .btn-primary:hover {
   background-color: $primary-darken;
-  animation-name: bounce !important;
-  -moz-animation-name: bounce !important;
+  animation-name: bounce;
+  -moz-animation-name: bounce;
 }
 
 .btn-default {
@@ -165,7 +175,7 @@ button {
   color: $medium-grey;
 }
 
-.btn-default:hover {
+.btn-default:hover:not(:disabled) {
   background-color: $default-text;
   color: $dark-violet;
 }
@@ -310,7 +320,6 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
 //Search
 .search-container {
   text-align: right;
@@ -324,7 +333,6 @@ input[type=submit] {
 .search-container .form-control {
   position: static;
 }
-
 
 //* ------ Header ------ *//
 .main-navigation-container {
@@ -471,7 +479,7 @@ input[type=submit] {
 
 .project-box:hover .client,
 .project-box-2:hover .client {
- color: $white;
+  color: $white;
 }
 
 .project-details-container {
@@ -481,16 +489,19 @@ input[type=submit] {
 .details {
 }
 
-.plus {
+.plus, .minus {
   display: inline-block;
   padding: 5px 10px;
-  background-color: $positive;
+  border-radius: 2px;
+  position: relative;
+}
+
+.plus {
+  background-color: $primary;
   color: $white;
 }
 
 .minus {
-  display: inline-block;
-  padding: 5px 10px;
   background-color: $danger;
   color: $dark-violet;
 }
@@ -836,23 +847,27 @@ figure.snip1321 * {
 }
 
 figcaption {
+  opacity: 0;
+  visibility: hidden;
   position: absolute;
   top: 50%;
   right: 15px;
   width: 250px;
-  opacity: 0;
   background-color: $dark-violet-figurecaption;
   padding: 15px;
   //border-left: 1px solid $medium-grey;
   color: $medium-grey;
+}
 
-  //-webkit-transition: all 0.4s ease-in-out;
-  //transition: all 0.4s ease-in-out;
-  //-webkit-transform: rotateX(-90deg);
-  //transform: rotateX(-90deg);
-  //-webkit-transform-origin: 50% 50%;
-  //-ms-transform-origin: 50% 50%;
-  //transform-origin: 50% 50%;
+figure.snip1321:hover figcaption,
+figure.snip1321.hover figcaption {
+  opacity: 1;
+  visibility: visible;
+
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
 }
 
 figure.snip1321 h2 {
@@ -895,6 +910,7 @@ figure.snip1321:hover .project-info-arrow {
   font-size: .6em;
   padding-right: 15px;
   color: $dark-grey;
+  top: -3px;
 }
 
 figure.snip1321:hover .project-bullet {
@@ -929,15 +945,6 @@ figure.snip1321:after {
   -ms-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
   opacity: 0;
-}
-
-figure.snip1321:hover figcaption,
-figure.snip1321.hover figcaption {
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  opacity: 1;
-  -webkit-transition-delay: 0.2s;
-  transition-delay: 0.2s;
 }
 
 figure.snip1321:hover .project-name {

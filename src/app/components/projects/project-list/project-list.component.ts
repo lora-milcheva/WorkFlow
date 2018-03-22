@@ -7,7 +7,10 @@ import { ProjectModel } from '../../../core/models/project.model';
 import { ProjectService } from '../../../core/services/project/project.service';
 import { AuthenticationService } from '../../../core/services/authentication/auth.service';
 import { Router } from '@angular/router';
-import { logWarnings } from "protractor/built/driverProviders";
+
+
+// jQuery
+declare let $: any;
 
 @Component({
   selector: 'app-projects-list',
@@ -15,6 +18,7 @@ import { logWarnings } from "protractor/built/driverProviders";
   styleUrls: ['./project-list.component.scss'],
   providers: []
 })
+
 export class ProjectListComponent implements OnInit {
   public projects: ProjectModel[];   // Check if true
   public activeProjects: ProjectModel[];
@@ -32,6 +36,16 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit() {
     this.checkUser();
+    this.showInfoOnTop();
+  }
+
+  showInfoOnTop() {
+    $(document).on('mouseover', '.project-box-2', function (e) {
+      $(this).css('z-index', 1);
+    });
+    $(document).on('mouseleave', '.project-box-2', function (e) {
+      $(this).css('z-index', 0);
+    });
   }
 
   loadProjects(): void {
@@ -72,7 +86,7 @@ export class ProjectListComponent implements OnInit {
 
   filterProjects() {
     for (const project of this.projects) {
-      if ( project.status === 'active') {
+      if (project.status === 'active') {
         this.activeProjects.push(project);
       } else {
         this.closedProjects.push(project);

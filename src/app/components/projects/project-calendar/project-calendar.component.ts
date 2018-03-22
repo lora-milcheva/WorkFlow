@@ -178,6 +178,17 @@ export class ProjectCalendarComponent implements OnInit, OnDestroy {
       });
   }
 
+  checkProjectStartMonth() {
+    const start = new Date(this.project.startDate);
+    return(this.month === start.getMonth());
+  }
+
+
+  checkProjectEndMonth() {
+    const end = new Date(this.project.endDate);
+    return(this.month === end.getMonth());
+  }
+
   loadPreviousMonth() {
     const start = new Date(this.project.startDate);
     if (this.month === start.getMonth()) {

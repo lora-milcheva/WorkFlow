@@ -33,9 +33,9 @@
   <main>
 
     <div class="month-box">
-      <button (click)="loadPreviousMonth()" class="btn btn-default">&lsaquo;</button>
+      <button (click)="loadPreviousMonth()" [disabled]="checkProjectStartMonth()" class="btn btn-default">&lsaquo;</button>
       <p> {{ monthAsString }} {{ year }} </p>
-      <button (click)="loadNextMonth()" class="btn btn-default">&rsaquo;</button>
+      <button (click)="loadNextMonth()" [disabled]="checkProjectEndMonth()" class="btn btn-default">&rsaquo;</button>
     </div>
 
 

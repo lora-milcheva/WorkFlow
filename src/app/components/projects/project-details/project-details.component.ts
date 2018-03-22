@@ -97,9 +97,18 @@ export class ProjectDetailsComponent implements OnInit {
     this.router.navigate(['project/edit/' + this.projectId]);
   }
 
-  confirmDeletion() {
-    if (confirm('Are you sure to delete' + this.project.name + 'project?')) {
-      this.deleteProject();
+  confirm(action) {
+    switch (action) {
+      case 'delete':
+        if (confirm('Are you sure to DELETE ' + this.project.name + ' project?')) {
+          this.deleteProject();
+        }
+        break;
+      case 'close':
+        if (confirm('Are you sure to CLOSE ' + this.project.name + ' project?')) {
+          this.closeProject();
+        }
+        break;
     }
   }
 

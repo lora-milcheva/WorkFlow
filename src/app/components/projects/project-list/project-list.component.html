@@ -51,7 +51,8 @@
                 <p>
                   <span class="details">Balance:</span>
                   <span class="value plus currency"
-                        [ngClass]="{'minus': project.budget - ( project.totalTime * project.rate / 60 ) <= 0}">
+                        [ngClass]="{'minus': project.budget - ( project.totalTime * project.rate / 60 ) <= 0}"
+                  >
             {{project.budget - ( project.totalTime * project.rate / 60 ) | floor | number }}
           </span>
                 </p>
